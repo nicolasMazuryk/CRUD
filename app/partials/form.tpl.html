@@ -1,0 +1,47 @@
+<div class="view">
+
+    <div class="get_id">
+        <div class="btn btn-default" ng-click="getIp()">Get your IP address</div>
+        <span>Your IP address:</span>
+        <span class="user_id">{{userIP}}</span>
+    </div>
+
+    <div loader></div>
+
+    <h2>Find your favourite music:</h2>
+
+    <form class="form form-inline">
+        <label>
+            Search that in iTunes:
+            <input type="search" class="form-control" ng-model="news.formSearch"/>
+        </label>
+        <label>
+            Category:
+            <select ng-options="catagory for catagory in catagories" ng-model="news.category"
+                    class="form-control"></select>
+        </label>
+        <button type="submit" ng-click="news.iTunes( news.formSearch, news.category )" class="btn btn-primary">Submit
+            Form
+        </button>
+    </form>
+
+
+    <div class="content">
+        <div class="content__item" ng-click="addToLiked(searchItem)" ng-repeat="searchItem in news.results">
+            <p><span>Artist:</span> {{searchItem.artistName}}</p>
+
+            <p><span>Collection:</span> {{searchItem.collectionName}}</p>
+
+            <img src="{{searchItem.artworkUrl100}}" alt=""/>
+
+            <p><span>Country:</span> ${{searchItem.country}}</p>
+
+            <p><span>Release date:</span> {{searchItem.releaseDate}}</p>
+            <a href="{{searchItem.artistViewUrl}}">
+                <div class="btn btn-primary btn-sm">More...</div>
+            </a>
+            <i class="fa fa-thumbs-up"></i>
+        </div>
+    </div>
+
+</div>
