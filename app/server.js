@@ -7,19 +7,18 @@ var http = require('http'),
     server,
 
     DatabaseInit = function () {
-        var arr_length = 1;
 
         this.storageLength = database.storageLength ?
-            database.srotageLength : 0;
+            database.storageLength : 0;
 
         this.likes = database.likes ?
-            database.likes : new Array( arr_length );
+            database.likes : [];
     };
 
-    storage = new DatabaseInit();
+storage = new DatabaseInit();
+
 
 server = new http.Server(function( req, res ) {
-    var requestCount = 0;
 
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
@@ -28,30 +27,23 @@ server = new http.Server(function( req, res ) {
     if (req.url == '/likes') {
         res.statusCode = 200;
         res.end( JSON.stringify( storage ) );
-
-        console.log( 'Likes arr have sent: ' + ++requestCount );
     }
 
-
-
     req.on('data', function (data) {
-        var parsed = JSON.parse( data.toString()),
-            index = storage.storageLength;
 
-        //storage.storageLength += 1;
-        storage.likes[ index ] = parsed;
+        storage.likes[ storage.storageLength ] = JSON.parse( data.toString());
+
+        storage.storageLength += 1;
 
         fs.writeFile( 'database.json', JSON.stringify( storage ) );
 
         res.statusCode = 200;
-        res.end('The item has been added to Liked Items');
-
-        console.log( 'Items have been posted: ' + ++requestCount );
+        res.end( JSON.stringify( storage ) );
     });
 
     req.on('end', function() {
         res.statusCode = 200;
-        res.end( 'Response from server side success. ');
+        res.end( 'End success' );
     });
 });
 
