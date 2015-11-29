@@ -25,6 +25,15 @@ angular.module('crudAppControllers', [])
             .error(function (error) {
                 console.log(error);
             });
+        vm.deleteItem = function ( index ) {
+console.log( 'delete' );
+            $http.delete( 'http://localhost:4000/likes', {
+                data: index
+            })
+                .then( function ( res ) {
+                    console.log( res );
+                } )
+        }
     }])
 
     .controller('newsRequestCtrl', [ '$scope', '$http', 'Categories', function ( $scope, $http, Categories) {
@@ -44,6 +53,8 @@ angular.module('crudAppControllers', [])
         };
 
         $scope.catagories = Categories;
+
+        music.selected = $scope.catagories[ 0 ];
 
         $scope.getIp = function () {
             $http.get('http://jsonip.com')
@@ -68,7 +79,6 @@ angular.module('crudAppControllers', [])
                 url = "http://localhost:1337/itunes.apple.com/search?term=" +
                     queryEncoded +
                     '&media=' + category +
-                    '&entity=album' +
                     '&limit=20';
 
             $http.get(url)

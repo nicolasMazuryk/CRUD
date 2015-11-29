@@ -17,10 +17,11 @@
         </label>
         <label>
             Category:
-            <select ng-options="catagory for catagory in catagories" ng-model="news.category"
-                    class="form-control"></select>
+            <select ng-options="catagory for catagory in catagories" ng-model="news.selected"
+                    class="form-control">
+            </select>
         </label>
-        <button type="submit" ng-click="news.iTunes( news.formSearch, news.category )" class="btn btn-primary">Submit
+        <button type="submit" ng-click="news.iTunes( news.formSearch, news.selected )" class="btn btn-primary">Submit
             Form
         </button>
     </form>

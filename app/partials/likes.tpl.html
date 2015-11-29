@@ -3,7 +3,7 @@
 
     <div class="items-amount">{{storageLength}}</div>
     <div ng-show="likes.hasItems" class="content">
-        <div class="content__item" ng-repeat="like in likes.results track by $index">
+        <div ng-click="likes.deleteItem($index)" class="content__item" ng-repeat="like in likes.results track by $index">
             <p><span>Artist:</span> {{like.artistName}}</p>
             <p><span>Collection:</span> {{like.collectionName}}</p>
             <img src="{{like.artworkUrl100}}" alt=""/>
