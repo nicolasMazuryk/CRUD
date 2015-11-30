@@ -9,41 +9,48 @@
     <div loader></div>
 
     <h2>Find your favourite music:</h2>
-    {{catagories}}
 
     <form class="form form-inline">
         <label>
             Search that in iTunes:
             <input type="search" class="form-control" ng-model="news.formSearch"/>
         </label>
-        <div ng-repeat="catagory in catagories" class="checkbox">
-            <label>
-                <input type="checkbox" value="{{catagory.section}}"/>
-                {{catagory.display_name}}
-            </label>
+        <button type="submit" ng-click="news.getLastNews( news.formSearch, news.selected )" class="btn btn-primary">
+            Submit Form
+        </button>
+        <div>{{news.selected}}</div>
+        <div class="form__sections">
+            <div ng-repeat="catagory in news.catagories" class="form__checkbox" >
+                <input id="{{catagory.section}}" type="checkbox" value="{{catagory.section}}"/>
+                <label for="{{catagory.section}}">{{catagory.display_name}}</label>
+            </div>
         </div>
 
-        <button type="submit" ng-click="news.getLastNews( news.formSearch, news.selected )" class="btn btn-primary">Submit
-            Form
-        </button>
+
     </form>
 
 
     <div class="content">
-        <div class="content__item" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">
-            <p><span>Title:</span> {{searchItem.title}}</p>
+        <article class="content__article" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">
+            <figure>
+                <a href="{{searchItem.url}}">
+                    <img src="{{searchItem.multimedia[3].url}}" width="{{searchItem.multimedia[3].width}}" height="{{searchItem.multimedia[3].height}}" alt=""/>
+                </a>
+                <figcaption>
+                    <span class="figcaption-text">{{searchItem.multimedia[3].caption}}</span>
+                    <span class="copyright">{{searchItem.multimedia[3].copyright}}</span>
+                </figcaption>
+            </figure>
+            <h2 class="article__heading">{{searchItem.title}}</h2>
 
-            <p><span>Collection:</span> {{searchItem.collectionName}}</p>
+            <p class="byline">{{searchItem.byline}}<span class="publish-date">{{searchItem.published_date}}</span></p>
 
-            <img src="{{searchItem.multimedia[3].url}}" width="{{searchItem.multimedia[3].width}}" height="{{searchItem.multimedia[3].height}}" alt=""/>
-            <span>{{searchItem.multimedia[3].caption}}"</span>
             <p>{{searchItem.abstract}}</p>
 
-            <p><span>Release date:</span> {{searchItem.releaseDate}}</p>
             <a href="{{searchItem.artistViewUrl}}" target="_blank">
                 <div class="btn btn-primary btn-sm">More...</div>
             </a>
-        </div>
+        </article>
     </div>
 
 </div>

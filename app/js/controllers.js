@@ -46,8 +46,11 @@ angular.module('crudAppControllers', [])
                 });
         };
 
-        $scope.catagories = Categories;
-        console.log( $scope.catagories );
+        Categories.fetch( function ( res ) {
+            vm.catagories = res.results;
+        });
+
+
 
         $scope.getIp = function () {
             $http.get('http://jsonip.com')

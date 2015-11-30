@@ -28,8 +28,8 @@ angular.module( 'crudApp', [
                 templateUrl: 'partials/form.tpl.html',
                 controller: 'newsRequestCtrl as news'
             })
-            .when( '/likes', {
-                templateUrl: 'partials/likes.tpl.html',
+            .when( '/saves', {
+                templateUrl: 'partials/saves.tpl.html',
                 controller: 'savesTplCtrl as saves'
             })
             .otherwise( { redirectTo: '/'} );

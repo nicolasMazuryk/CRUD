@@ -38,6 +38,42 @@ h2, form {
     margin: 5%;
 }
 
+.form {
+    width: 960px;
+}
+
+.form__checkbox {
+    display: inline-block;
+}
+
+.form__sections {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.form__checkbox input {
+    display: none;
+}
+
+.form__checkbox label {
+    display: inline-block;
+    margin: 3px 4px;
+    padding: 4px 8px;
+    border: 1px solid #03A9F4;
+    background: #ffffff;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.form__checkbox label:hover {
+    background: #03A9F4;
+}
+
+.form__checkbox input:checked + label {
+    background: #03A9F4;
+}
+
 /* ----------- respond results -----------------*/
 .content {
     display: flex;
@@ -51,7 +87,7 @@ h2, form {
     margin: 0 auto;
 }
 
-.content__item {
+.content__article {
     margin: 12px 0;
     padding: 4px;
     flex-basis: 45%;
@@ -61,17 +97,17 @@ h2, form {
     /*justify-content: space-between;*/
 }
 
-.content__item p {
+.content__article p {
     margin: 0;
     font: 400 8pt "Ubuntu";
     text-align: justify;
 }
 
-.content__item span {
+.content__article span {
     font: 700 8pt "Ubuntu";
 }
 
-.content__item:hover:after {
+.content__article:hover:after {
     /*display: inline-block;*/
     content: 'Like';
     position: absolute;
@@ -89,14 +125,14 @@ h2, form {
     padding-top: calc( (100%/2) - 4px);
 }
 
-.content__item img {
+.content__article img {
     display: inline-block;
     margin: 0 auto;
     padding: 0 5px;
 }
 
 
-.likes__ .content__item:hover:after {
+.likes__ .content__article:hover:after {
     display: none;
 }
 

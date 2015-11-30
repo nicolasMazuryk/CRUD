@@ -10,17 +10,16 @@ angular.module( 'crudAppServices', [ 'ngResource'])
         })
     }])
 
-    .factory( 'Categories', ['$http', function ( $http ) {
+    .factory( 'Categories', ['$resource', function ( $resource ) {
         var api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254';
 
-
-        return $http.get('http://api.nytimes.com/svc/news/v3/content/section-list?api-key=' + api_key_newswire )
-            .success( function ( res ) {
-                return res.results;
-            })
-            .error( function ( error ) {
-                console.log( error );
-            });
+        return $resource('http://api.nytimes.com/svc/news/v3/content/section-list?api-key=' + api_key_newswire, {}, {
+            fetch: {
+                method: 'GET',
+                params: {},
+                isArray: false
+            }
+        });
     }])
 
     .service('requestReview', ['$resource', '$http',
