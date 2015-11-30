@@ -11,8 +11,8 @@ var http = require('http'),
         this.storageLength = database.storageLength ?
             database.storageLength : 0;
 
-        this.likes = database.likes ?
-            database.likes : [];
+        this.saves = database.saves ?
+            database.saves : [];
     };
 
 storage = new DatabaseInit();
@@ -24,14 +24,14 @@ server = new http.Server(function( req, res ) {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST', 'PUT', 'DELETE');
 
-    if (req.url == '/likes') {
+    if (req.url == '/saves') {
         res.statusCode = 200;
         res.end( JSON.stringify( storage ) );
     }
 
     req.on('data', function (data) {
 
-        storage.likes[ storage.storageLength ] = JSON.parse( data.toString());
+        storage.saves[ storage.storageLength ] = JSON.parse( data.toString());
 
         storage.storageLength += 1;
 

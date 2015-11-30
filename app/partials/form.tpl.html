@@ -9,33 +9,35 @@
     <div loader></div>
 
     <h2>Find your favourite music:</h2>
+    {{catagories}}
 
     <form class="form form-inline">
         <label>
             Search that in iTunes:
             <input type="search" class="form-control" ng-model="news.formSearch"/>
         </label>
-        <label>
-            Category:
-            <select ng-options="catagory for catagory in catagories" ng-model="news.selected"
-                    class="form-control">
-            </select>
-        </label>
-        <button type="submit" ng-click="news.iTunes( news.formSearch, news.selected )" class="btn btn-primary">Submit
+        <div ng-repeat="catagory in catagories" class="checkbox">
+            <label>
+                <input type="checkbox" value="{{catagory.section}}"/>
+                {{catagory.display_name}}
+            </label>
+        </div>
+
+        <button type="submit" ng-click="news.getLastNews( news.formSearch, news.selected )" class="btn btn-primary">Submit
             Form
         </button>
     </form>
 
 
     <div class="content">
-        <div class="content__item" ng-click="addToLiked(searchItem)" ng-repeat="searchItem in news.results">
-            <p><span>Artist:</span> {{searchItem.artistName}}</p>
+        <div class="content__item" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">
+            <p><span>Title:</span> {{searchItem.title}}</p>
 
             <p><span>Collection:</span> {{searchItem.collectionName}}</p>
 
-            <img src="{{searchItem.artworkUrl100}}" alt=""/>
-
-            <p><span>Country:</span> ${{searchItem.country}}</p>
+            <img src="{{searchItem.multimedia[3].url}}" width="{{searchItem.multimedia[3].width}}" height="{{searchItem.multimedia[3].height}}" alt=""/>
+            <span>{{searchItem.multimedia[3].caption}}"</span>
+            <p>{{searchItem.abstract}}</p>
 
             <p><span>Release date:</span> {{searchItem.releaseDate}}</p>
             <a href="{{searchItem.artistViewUrl}}" target="_blank">

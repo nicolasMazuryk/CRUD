@@ -30,7 +30,7 @@ angular.module( 'crudApp', [
             })
             .when( '/likes', {
                 templateUrl: 'partials/likes.tpl.html',
-                controller: 'likesTplCtrl as likes'
+                controller: 'savesTplCtrl as saves'
             })
             .otherwise( { redirectTo: '/'} );
     }]);

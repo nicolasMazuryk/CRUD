@@ -4,47 +4,41 @@
 
 angular.module('crudAppControllers', [])
 
-    .controller('rootCtrl', ['$scope', '$http', function ($scope, $http) {
-        //$scope.storageLength = 0;
-    }])
-
-    .controller('likesTplCtrl', [ '$scope', '$http', function ( $scope, $http) {
+    .controller('savesTplCtrl', [ '$scope', '$http', function ( $scope, $http) {
         var vm = this;
 
         vm.checkEmpty = function (list) {
             return list[0] !== null;
         };
 
-        $http.get('http://localhost:4000/likes')
+        $http.get('http://localhost:4000/saves')
             .success(function (data) {
-                vm.hasItems = vm.checkEmpty(data.likes);
+                vm.hasItems = vm.checkEmpty(data.saves);
 
-                vm.results = data.likes;
+                vm.results = data.saves;
                 $scope.storageLength = data.storageLength;
             })
             .error(function (error) {
                 console.log(error);
             });
-        vm.deleteItem = function ( index ) {
-console.log( 'delete' );
-            $http.delete( 'http://localhost:4000/likes', {
-                data: index
-            })
-                .then( function ( res ) {
-                    console.log( res );
-                } )
-        }
+//        vm.deleteItem = function ( index ) {
+//console.log( 'delete' );
+//            $http.delete( 'http://localhost:4000/likes', {
+//                data: index
+//            })
+//                .then( function ( res ) {
+//                    console.log( res );
+//                } )
+//        }
     }])
 
     .controller('newsRequestCtrl', [ '$scope', '$http', 'Categories', function ( $scope, $http, Categories) {
-        var music = this;
+        var vm = this;
 
-        $scope.addToLiked = function (event) {
+        $scope.addToSaves = function (event) {
 
             $http.post('http://localhost:4000/post', JSON.stringify(event))
                 .success(function (res) {
-                    console.log(res.storageLength);
-
                     $scope.storageLength = res.storageLength;
                 })
                 .error(function (error) {
@@ -53,8 +47,7 @@ console.log( 'delete' );
         };
 
         $scope.catagories = Categories;
-
-        music.selected = $scope.catagories[ 0 ];
+        console.log( $scope.catagories );
 
         $scope.getIp = function () {
             $http.get('http://jsonip.com')
@@ -71,19 +64,18 @@ console.log( 'delete' );
                 })
         };
 
-        this.iTunes = function (query, category) {
+        vm.getLastNews = function (query, category) {
             //music.results = requestReview.fetch( function( res ) {
             //    return res.results;
             //});
             var queryEncoded = encodeURIComponent(query),
-                url = "http://localhost:1337/itunes.apple.com/search?term=" +
-                    queryEncoded +
-                    '&media=' + category +
-                    '&limit=20';
+                api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254',
+                url = "http://api.nytimes.com/svc/news/v3/content/all/all?api-key=" +
+                    api_key_newswire;
 
             $http.get(url)
                 .success(function (res) {
-                    music.results = res.results;
+                    vm.results = res.results;
                 }).error(function (error) {
                     console.log(error);
                 })

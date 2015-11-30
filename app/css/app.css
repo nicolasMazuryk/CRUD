@@ -54,7 +54,7 @@ h2, form {
 .content__item {
     margin: 12px 0;
     padding: 4px;
-    flex-basis: 150px;
+    flex-basis: 45%;
     position: relative;
     /*display: flex;*/
     /*flex-flow: column nowrap;*/

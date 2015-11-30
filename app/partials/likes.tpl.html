@@ -2,14 +2,17 @@
     <h2>Favourite artists:</h2>
 
     <div class="items-amount">{{storageLength}}</div>
-    <div ng-show="likes.hasItems" class="content">
-        <div ng-click="likes.deleteItem($index)" class="content__item" ng-repeat="like in likes.results track by $index">
-            <p><span>Artist:</span> {{like.artistName}}</p>
-            <p><span>Collection:</span> {{like.collectionName}}</p>
-            <img src="{{like.artworkUrl100}}" alt=""/>
-            <p><span>Country:</span> ${{like.country}}</p>
-            <p><span>Release date:</span> {{like.releaseDate}}</p>
-            <a href="{{like.artistViewUrl}}" target="_blank"><div class="btn btn-primary btn-sm">More...</div></a>
+    <div ng-show="saves.hasItems" class="content">
+        <div ng-click="saves.deleteItem($index)" class="content__item" ng-repeat="searchItem in saves.results track by $index">
+            <p><span>Title:</span> {{searchItem.title}}</p>
+
+            <img src="{{searchItem.multimedia[3].url}}" width="{{searchItem.multimedia[3].width}}" height="{{searchItem.multimedia[3].height}}" alt=""/>
+            <span>{{searchItem.multimedia[3].caption}}"</span>
+            <p>{{searchItem.abstract}}</p>
+
+            <a href="{{searchItem.artistViewUrl}}" target="_blank">
+                <div class="btn btn-primary btn-sm">More...</div>
+            </a>
         </div>
     </div>
 </div>
