@@ -7,6 +7,8 @@ angular.module('crudAppControllers', [])
     .controller('savesTplCtrl', [ '$scope', '$http', function ( $scope, $http) {
         var vm = this;
 
+        vm.api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254';
+
         vm.checkEmpty = function (list) {
             return list[0] !== null;
         };
@@ -21,36 +23,87 @@ angular.module('crudAppControllers', [])
             .error(function (error) {
                 console.log(error);
             });
-//        vm.deleteItem = function ( index ) {
-//console.log( 'delete' );
-//            $http.delete( 'http://localhost:4000/likes', {
-//                data: index
-//            })
-//                .then( function ( res ) {
-//                    console.log( res );
-//                } )
-//        }
+
+        vm.getSpecificArticle = function ( path ) {
+
+            $http.get( 'http://api.nytimes.com/svc/news/v3/content?url=' + path + '&api-key=' + vm.api_key_newswire )
+                .success( function ( res ) {
+                    console.log( res );
+                })
+                .error( function ( error ) {
+                    console.log( error );
+                });
+        }
+
     }])
 
     .controller('newsRequestCtrl', [ '$scope', '$http', 'Categories', function ( $scope, $http, Categories) {
         var vm = this;
 
-        $scope.addToSaves = function (event) {
-
-            $http.post('http://localhost:4000/post', JSON.stringify(event))
-                .success(function (res) {
-                    $scope.storageLength = res.storageLength;
-                })
-                .error(function (error) {
-                    console.log(error);
-                });
-        };
+        $scope.selection = [];
 
         Categories.fetch( function ( res ) {
             vm.catagories = res.results;
         });
 
+        vm.getSearchResult = function () {
+            var api_key_search = '518a9cd9ce5245242456a5c4c29996bc:14:73615254',
+                query = encodeURIComponent( vm.formSearch),
 
+                url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+                    query +
+                    //"&fq=news_desk:(" +
+                    //')' +
+                    "&api-key=" +
+                    api_key_search;
+
+            $http.get( url )
+                .then( function ( res ) {
+                    console.log( res );
+                })
+
+
+        };
+
+        vm.getLastNews = function () {
+            var api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254',
+                sections = '',
+                i = 0,
+                l = $scope.selection.length,
+                section_encoded, url;
+
+            for (; i < l; i += 1 ) {
+                section_encoded = encodeURI( $scope.selection[i] );
+                sections = sections.concat( section_encoded, ';');
+            }
+            console.log( sections );
+
+            url = "http://api.nytimes.com/svc/news/v3/content/all/" +
+                sections +
+                "?api-key=" +
+                api_key_newswire;
+
+console.log( url );
+            $http.get(url)
+                .success(function (res) {
+                    vm.results = res.results;
+                }).error(function (error) {
+                    console.log(error);
+                })
+        };
+
+        $scope.addToSaves = function (event) {
+
+            $http.post('http://localhost:4000/post', JSON.stringify(event))
+
+                .success(function (res) {
+                    $scope.storageLength = res.storageLength;
+                })
+
+                .error(function (error) {
+                    console.log(error);
+                });
+        };
 
         $scope.getIp = function () {
             $http.get('http://jsonip.com')
@@ -66,23 +119,6 @@ angular.module('crudAppControllers', [])
                     $scope.spreadsheetValue = res.feed.entry[0].gsx$desc.$t;
                 })
         };
-
-        vm.getLastNews = function (query, category) {
-            //music.results = requestReview.fetch( function( res ) {
-            //    return res.results;
-            //});
-            var queryEncoded = encodeURIComponent(query),
-                api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254',
-                url = "http://api.nytimes.com/svc/news/v3/content/all/all?api-key=" +
-                    api_key_newswire;
-
-            $http.get(url)
-                .success(function (res) {
-                    vm.results = res.results;
-                }).error(function (error) {
-                    console.log(error);
-                })
-        }
     }])
 
     .controller('headerIssueCtrl', ['$scope', 'requestReview', 'reviewService', function ($scope, requestReview, reviewService) {

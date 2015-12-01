@@ -31,6 +31,29 @@ angular.module( 'crudAppDirectives', [])
         }
     }] )
 
+    .directive( 'checkboxGroup', function() {
+        return {
+            restrict: 'A',
+            link: function ( scope, elem, attrs, ctrl ) {
+
+                elem.bind('click', function () {
+
+                    var index = scope.selection.indexOf( attrs.value );
+
+                    if ( index === -1 ) {
+
+                        scope.selection.push( attrs.value );
+
+                    } else {
+
+                        scope.selection.splice( index, 1 );
+
+                    }
+                })
+            }
+        }
+    })
+
     .directive( 'loader', [ '$http', function ( $http ) {
         return {
             restrict: 'A',

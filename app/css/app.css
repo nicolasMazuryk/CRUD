@@ -29,18 +29,63 @@ h2, form {
     margin: 20px auto;
 }
 
+.nyt {
+    margin: 0 auto;
+}
+
 .top-navbar {
     width: 60%;
     margin: 0 auto;
+}
+
+.nav a {
+    text-transform: uppercase;
 }
 
 .nav li + li {
     margin: 5%;
 }
 
+.btn_load {
+    display: block;
+    width: 100%;
+    margin: 30px auto 15px;
+    font-size: 16pt;
+}
+
 .form {
     width: 960px;
 }
+
+.form__search {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+
+.form__search_label {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: #ffffff;
+    width: 75%;
+}
+
+.form__search .btn-search {
+    padding: 10px 15px;
+    border-radius: 5px;
+    width: 24%;
+    font-size: 15pt;
+    align-self: baseline;
+}
+
+.form__search input[type=search] {
+    width: 100%;
+}
+
+
 
 .form__checkbox {
     display: inline-block;
@@ -63,6 +108,7 @@ h2, form {
     border: 1px solid #03A9F4;
     background: #ffffff;
     border-radius: 4px;
+    font-size: 13px;
     transition: all 0.3s ease;
 }
 

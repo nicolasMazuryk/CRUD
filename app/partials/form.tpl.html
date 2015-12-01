@@ -1,31 +1,39 @@
 <div class="view">
 
-    <div class="get_id">
-        <div class="btn btn-default" ng-click="getIp()">Get your IP address</div>
-        <span>Your IP address:</span>
-        <span class="user_id">{{userIP}}</span>
-    </div>
+    <!--<div class="get_id">-->
+        <!--<div class="btn btn-default" ng-click="getIp()">Get your IP address</div>-->
+        <!--<span>Your IP address:</span>-->
+        <!--<span class="user_id">{{userIP}}</span>-->
+    <!--</div>-->
 
     <div loader></div>
 
-    <h2>Find your favourite music:</h2>
+    <img class="nyt" width="379px" height="64px" src="http://a1.nyt.com/assets/homepage/20151123-033227/images/foundation/logos/nyt-logo-379x64.png" alt="The New Your"/>
 
     <form class="form form-inline">
-        <label>
-            Search that in iTunes:
-            <input type="search" class="form-control" ng-model="news.formSearch"/>
-        </label>
-        <button type="submit" ng-click="news.getLastNews( news.formSearch, news.selected )" class="btn btn-primary">
+        <div class="form__search">
+            <label class="form__search_label">
+                <input type="search" class="form-control" ng-model="news.formSearch" placeholder="Find Article"/>
+            </label>
+
+            <button ng-click="news.getSearchResult()" type="button" class="btn-search btn btn-primary">
             Submit Form
-        </button>
-        <div>{{news.selected}}</div>
+            </button>
+
+        </div>
+
+        <div ng-click="news.getLastNews()" class="btn_load btn btn-success">Pick & Load</div>
+
         <div class="form__sections">
+            <div class="form__checkbox">
+                <input checkbox-group id="default" type="checkbox" value="all"/>
+                <label for="default">All</label>
+            </div>
             <div ng-repeat="catagory in news.catagories" class="form__checkbox" >
-                <input id="{{catagory.section}}" type="checkbox" value="{{catagory.section}}"/>
+                <input checkbox-group id="{{catagory.section}}" type="checkbox" value="{{catagory.section}}"/>
                 <label for="{{catagory.section}}">{{catagory.display_name}}</label>
             </div>
         </div>
-
 
     </form>
 
