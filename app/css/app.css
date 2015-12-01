@@ -104,7 +104,7 @@ h2, form {
 .form__checkbox label {
     display: inline-block;
     margin: 3px 4px;
-    padding: 4px 8px;
+    padding: 4px 12px;
     border: 1px solid #03A9F4;
     background: #ffffff;
     border-radius: 4px;
@@ -127,55 +127,101 @@ h2, form {
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
 
     width: 960px;
+    height: 100%;
     margin: 0 auto;
 }
 
 .content__article {
     margin: 12px 0;
-    padding: 4px;
-    flex-basis: 45%;
+    padding: 8px;
+    flex-basis: 32%;
+    height: 100%;
     position: relative;
+    background: #fff;
+    font: 400 12pt "Ubuntu";
     /*display: flex;*/
     /*flex-flow: column nowrap;*/
     /*justify-content: space-between;*/
 }
 
-.content__article p {
+/*.content__article img {*/
+    /*display: inline-block;*/
+    /*margin: 0 auto;*/
+/*}*/
+
+.content__article .figcaption-text {
     margin: 0;
-    font: 400 8pt "Ubuntu";
+    line-height: 14px;
+    color: #666;
+    font: 400 11pt "nyt-cheltenham-sh",georgia,"times new roman",times,serif;";
     text-align: justify;
 }
 
-.content__article span {
-    font: 700 8pt "Ubuntu";
+.content__article .copyright {
+
 }
 
-.content__article:hover:after {
-    /*display: inline-block;*/
-    content: 'Like';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(200,200,200, .4);
-    font: 600 26pt "Helvetica Neue";
-    color: rgba( 10, 10 ,10, .7 );
-    text-align: center;
-    /*line-height: 250px;*/
-    padding-top: calc( (100%/2) - 4px);
+.content__article .article__heading {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 19px;
+    color: #000;
 }
 
-.content__article img {
-    display: inline-block;
-    margin: 0 auto;
-    padding: 0 5px;
+.content__article .thumb {
+    float: right;
+    display: inline;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
+
+.content__article .byline {
+    font-size: 11px;
+    line-height: 14px;
+    color: #808080;
+    margin-bottom: 3px;
+    margin-top: 5px;
+}
+
+.content__article .summary {
+    color: #333333;
+    font-size: 13px;
+    line-height: 18px;
+    margin-bottom: 7px;
+    text-align: justify;
+    font-family: georgia, "times new roman", times, serif;;
+}
+
+.content__article .update-date {
+    margin-left: 3px;
+    color: #a81817;
+    font-size: 11px;
+    line-height: 12px;
+}
+
+/*.content__article:hover:after {*/
+    /*/!*display: inline-block;*!/*/
+    /*content: 'Like';*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*background: rgba(200,200,200, .4);*/
+    /*font: 600 26pt "Helvetica Neue";*/
+    /*color: rgba( 10, 10 ,10, .7 );*/
+    /*text-align: center;*/
+    /*/!*line-height: 250px;*!/*/
+    /*padding-top: calc( (100%/2) - 4px);*/
+/*}*/
+
+
 
 
 .likes__ .content__article:hover:after {

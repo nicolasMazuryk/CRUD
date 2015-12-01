@@ -40,16 +40,21 @@ angular.module('crudAppControllers', [])
     .controller('newsRequestCtrl', [ '$scope', '$http', 'Categories', function ( $scope, $http, Categories) {
         var vm = this;
 
+        vm.catagories = [];
         $scope.selection = [];
 
         Categories.fetch( function ( res ) {
-            vm.catagories = res.results;
+            angular.forEach( res.results, function ( idx ) {
+                // delete sections with "." to prevent URL encoding issues
+                if ( !idx.section.match( /\.+?/g )) {
+                    vm.catagories.push( idx );
+                }
+            });
         });
 
         vm.getSearchResult = function () {
             var api_key_search = '518a9cd9ce5245242456a5c4c29996bc:14:73615254',
-                query = encodeURIComponent( vm.formSearch),
-
+                query = encodeURIComponent( vm.formSearch ),
                 url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
                     query +
                     //"&fq=news_desk:(" +
@@ -64,22 +69,45 @@ angular.module('crudAppControllers', [])
 
 
         };
+        vm.parseDate = function ( date ) {
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Now', 'Dec'],
+                publish_date = new Date( date),
+                month = months[ publish_date.getMonth() ],
+                days = publish_date.getDate(),
+                hours = publish_date.getHours(),
+                mins = publish_date.getMinutes();
+
+            function toCorrectTime( time ) {
+                if ( time.toString().length !== 2 ) {
+                    return '0' + time;
+                } else {
+                    return time;
+                }
+            }
+
+            return month + ' ' + days + ' at ' + toCorrectTime( hours ) + ':' + toCorrectTime( mins );
+        };
 
         vm.getLastNews = function () {
             var api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254',
-                sections = '',
+                section_encoded = [],
                 i = 0,
                 l = $scope.selection.length,
-                section_encoded, url;
+                regexp_slash = /\/+?/g,
+                regexp_dot = /\.+?/g,
+                sections, url, complete_sections;
 
             for (; i < l; i += 1 ) {
-                section_encoded = encodeURI( $scope.selection[i] );
-                sections = sections.concat( section_encoded, ';');
+                section_encoded.push( encodeURI( $scope.selection[i] ) );
             }
-            console.log( sections );
+
+            sections = section_encoded.join(';');
+            complete_sections = sections.replace( regexp_slash, '%2F').replace( regexp_dot, '%2E');
+
+            console.log( complete_sections );
 
             url = "http://api.nytimes.com/svc/news/v3/content/all/" +
-                sections +
+                complete_sections +
                 "?api-key=" +
                 api_key_newswire;
 

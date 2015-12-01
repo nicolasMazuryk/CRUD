@@ -40,24 +40,29 @@
 
     <div class="content">
         <article class="content__article" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">
-            <figure>
-                <a href="{{searchItem.url}}">
-                    <img src="{{searchItem.multimedia[3].url}}" width="{{searchItem.multimedia[3].width}}" height="{{searchItem.multimedia[3].height}}" alt=""/>
-                </a>
-                <figcaption>
-                    <span class="figcaption-text">{{searchItem.multimedia[3].caption}}</span>
-                    <span class="copyright">{{searchItem.multimedia[3].copyright}}</span>
-                </figcaption>
-            </figure>
+            <!--<figure>-->
+                <!--<a href="{{searchItem.url}}">-->
+                    <!--<img src="{{searchItem.multimedia[3].url}}" width="{{searchItem.multimedia[3].width}}" height="{{searchItem.multimedia[3].height}}" alt=""/>-->
+                <!--</a>-->
+                <!--<figcaption>-->
+                    <!--<span class="figcaption-text">{{searchItem.multimedia[3].caption}}</span>-->
+                    <!--<span class="copyright">{{searchItem.multimedia[3].copyright}}</span>-->
+                <!--</figcaption>-->
+            <!--</figure>-->
+
+            <a class="thumb" href="{{searchItem.url}}">
+                <img src="{{searchItem.multimedia[0].url}}" width="{{searchItem.multimedia[0].width}}" height="{{searchItem.multimedia[0].height}}" alt=""/>
+            </a>
+
             <h2 class="article__heading">{{searchItem.title}}</h2>
 
-            <p class="byline">{{searchItem.byline}}<span class="publish-date">{{searchItem.published_date}}</span></p>
+            <p class="byline">{{searchItem.byline}}<span class="update-date"> {{news.parseDate(searchItem.updated_date)}}</span></p>
 
-            <p>{{searchItem.abstract}}</p>
+            <p class="summary">{{searchItem.abstract}}</p>
 
-            <a href="{{searchItem.artistViewUrl}}" target="_blank">
-                <div class="btn btn-primary btn-sm">More...</div>
-            </a>
+            <!--<a href="{{searchItem.artistViewUrl}}" target="_blank">-->
+                <!--<div class="btn btn-primary btn-sm">More...</div>-->
+            <!--</a>-->
         </article>
     </div>
 
