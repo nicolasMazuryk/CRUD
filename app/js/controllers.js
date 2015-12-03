@@ -41,6 +41,7 @@ angular.module('crudAppControllers', [])
         var vm = this;
 
         vm.catagories = [];
+        vm.nyt_domain = 'http://www.nytimes.com/';
         $scope.selection = [];
 
         Categories.fetch( function ( res ) {
@@ -71,6 +72,8 @@ angular.module('crudAppControllers', [])
 
 
         };
+
+
         vm.parseDate = function ( date ) {
             var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Now', 'Dec'],
                 publish_date = new Date( date),

@@ -1,0 +1,299 @@
+@import url(variables.less);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);
+
+html {
+  height: 100%;
+}
+
+body {
+  background: url('../img/bg-10-full.jpg');
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.view {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.loading-indicator {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #717D8C;
+  opacity: 0.25;
+}
+
+.three-dots-row-spinner {
+  position: absolute;
+  margin: 0;
+  top: 48%;
+  left: 48%;
+  background: #03A9F4;
+  z-index: 120;
+}
+
+h2, form {
+  margin: 20px auto;
+}
+
+.nyt {
+  display: block;
+  margin: 0 auto;
+}
+
+.get_id {
+  display: inline-block;
+  width: 500px;
+}
+
+.user_id {
+  font: 600 13pt "Lucida Console";
+}
+
+.grid-960 {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.top-navbar {
+  width: 60%;
+  margin: 0 auto;
+
+  .nav a {
+    text-transform: uppercase;
+  }
+
+  .nav li + li {
+    margin: 5%;
+  }
+}
+
+.form__search {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  input[type=search] {
+    width: 100%;
+  }
+
+  .form__search_label {
+    padding: 10px 15px;
+    border-radius: 5px;
+    background: #ffffff;
+    width: 75%;
+  }
+
+  .btn-search {
+    padding: 10px 15px;
+    border-radius: 5px;
+    width: 24%;
+    font-size: 15pt;
+    align-self: baseline;
+  }
+}
+
+
+.btn_load {
+  display: block;
+  width: 100%;
+  margin: 30px auto 15px;
+  font-size: 16pt;
+}
+
+.form__sections {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  .form__checkbox {
+    display: inline-block;
+
+    input {
+      display: none;
+
+      &:checked + label {
+        background: #03A9F4;
+      }
+    }
+
+    label {
+      display: inline-block;
+      margin: 3px 4px;
+      padding: 4px 12px;
+      border: 1px solid #03A9F4;
+      background: #ffffff;
+      border-radius: 4px;
+      font-size: 13px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #03A9F4;
+      }
+    }
+  }
+}
+
+.results-length {
+  width: 960px;
+  margin: 12px auto;
+  text-align: right;
+  font: 600 13pt "Ubuntu";
+  color: #696969;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  align-items: flex-start;
+  width: 960px;
+  height: 100%;
+  margin: 0 auto;
+
+  .content__article {
+    margin: 12px 0;
+    padding: 8px;
+    flex-basis: 32%;
+    height: 100%;
+    position: relative;
+    background: #fff;
+    font: 400 12pt "Ubuntu";
+
+    &:hover {
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    .figcaption-text {
+      margin: 0;
+      line-height: 14px;
+      color: #666;
+      font: 400 11pt "nyt-cheltenham-sh",georgia,"times new roman",times,serif;
+      text-align: justify;
+    }
+
+    .article__heading {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 19px;
+      color: #000;
+    }
+
+    .thumb {
+      float: right;
+      display: inline;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+
+    .byline {
+      font-size: 11px;
+      line-height: 14px;
+      color: #808080;
+      margin-bottom: 3px;
+      margin-top: 5px;
+    }
+
+    .summary {
+      display: inline;
+      color: #333333;
+      font-size: 13px;
+      line-height: 18px;
+      margin: 8px 0;
+      text-align: justify;
+      font-family: georgia, "times new roman", times, serif;
+
+      max-height: 106px;
+      overflow: hidden;
+      -ms-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+    }
+
+    .update-date {
+      margin-left: 3px;
+      color: #a81817;
+      font-size: 11px;
+      line-height: 12px;
+    }
+
+    .hashtag {
+      display: inline-block;
+      padding: 0 3px;
+      line-height: 1 !important;
+      color: dodgerblue;
+      font: 300 7pt "Ubuntu";
+      text-decoration: underline;
+    }
+  }
+}
+
+.content__article:hover.edit:before {
+  position: absolute;
+  display: inline-block;
+  margin: 5px;
+  content: '';
+  width: 50px;
+  height: 50px;
+  top: 0;
+  right: 0;
+  background: url(../img/icon-edit.png), rgba(255,255,255, .8);
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 3;
+  cursor: pointer;
+}
+
+footer {
+  font: 400 9pt "Ubuntu";
+
+  .developer {
+    color: #FDF5E6;
+    font-size: 1.1em;
+  }
+}
+
+//---------------- Bookmarks page-----------------
+
+.likes__ .content__article:hover:after {
+  display: none;
+}
+
+.items-amount {
+  position: absolute;
+  right: 0;
+  height: 45px;
+  width: 45px;
+  padding-top: 7px;
+  text-align: center;
+  line-height: 45px;
+  border-radius: 50%;
+  background: rgba(59,89,152, .9);
+  color: #ffffff;
+  font: 600 20pt "Arial";
+}
+
+//------------------------------------------------
+
+@media screen and (max-width: 980px) {
+  .content {
+    width: 100%;
+  }
+}
+
