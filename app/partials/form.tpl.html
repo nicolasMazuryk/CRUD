@@ -8,7 +8,6 @@
 
     <div loader></div>
 
-    <img class="nyt" width="379px" height="64px" src="http://a1.nyt.com/assets/homepage/20151123-033227/images/foundation/logos/nyt-logo-379x64.png" alt="The New Your"/>
 
     <form class="form form-inline">
         <div class="form__search">
@@ -37,18 +36,29 @@
 
     </form>
 
+    <div class="results-length" ng-show="news.searchResultView" >{{20}} of about {{news.resultsLength}}</div>
 
     <div class="content">
-        <article class="content__article" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">
+        <!--<article ng-show="news.searchResultView" class="content__article" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">-->
             <!--<figure>-->
-                <!--<a href="{{searchItem.url}}">-->
-                    <!--<img src="{{searchItem.multimedia[3].url}}" width="{{searchItem.multimedia[3].width}}" height="{{searchItem.multimedia[3].height}}" alt=""/>-->
+                <!--<a class="thumb" href="{{searchItem.url}}">-->
+                    <!--<img src="{{searchItem.multimedia[2].url}}" width="{{searchItem.multimedia[2].width}}" height="{{searchItem.multimedia[2].height}}" alt=""/>-->
                 <!--</a>-->
                 <!--<figcaption>-->
                     <!--<span class="figcaption-text">{{searchItem.multimedia[3].caption}}</span>-->
                     <!--<span class="copyright">{{searchItem.multimedia[3].copyright}}</span>-->
                 <!--</figcaption>-->
             <!--</figure>-->
+
+            <!--<h2 class="article__heading">{{searchItem.title}}</h2>-->
+
+            <!--<p class="byline">{{searchItem.byline}}<span class="update-date"> {{news.parseDate(searchItem.updated_date)}}</span></p>-->
+
+            <!--<p class="summary">{{searchItem.abstract}}</p>-->
+
+        <!--</article>-->
+
+        <article class="content__article" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">
 
             <a class="thumb" href="{{searchItem.url}}">
                 <img src="{{searchItem.multimedia[0].url}}" width="{{searchItem.multimedia[0].width}}" height="{{searchItem.multimedia[0].height}}" alt=""/>
@@ -60,10 +70,8 @@
 
             <p class="summary">{{searchItem.abstract}}</p>
 
-            <!--<a href="{{searchItem.artistViewUrl}}" target="_blank">-->
-                <!--<div class="btn btn-primary btn-sm">More...</div>-->
-            <!--</a>-->
         </article>
+
     </div>
 
 </div>

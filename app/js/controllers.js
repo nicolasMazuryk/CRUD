@@ -64,7 +64,9 @@ angular.module('crudAppControllers', [])
 
             $http.get( url )
                 .then( function ( res ) {
-                    console.log( res );
+                    vm.results = res.data.response.docs;
+                    vm.resultsLength = res.data.response.meta.hits;
+                    vm.searchResultView = true;
                 })
 
 
@@ -104,17 +106,15 @@ angular.module('crudAppControllers', [])
             sections = section_encoded.join(';');
             complete_sections = sections.replace( regexp_slash, '%2F').replace( regexp_dot, '%2E');
 
-            console.log( complete_sections );
-
             url = "http://api.nytimes.com/svc/news/v3/content/all/" +
                 complete_sections +
                 "?api-key=" +
                 api_key_newswire;
 
-console.log( url );
             $http.get(url)
                 .success(function (res) {
                     vm.results = res.results;
+                    vm.searchResultView = true;
                 }).error(function (error) {
                     console.log(error);
                 })
