@@ -207,6 +207,8 @@ form {
   position: relative;
   background: #fff;
   font: 400 12pt "Ubuntu";
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
 }
 .content .content__article:hover {
   opacity: 0.8;
@@ -266,30 +268,12 @@ form {
   font: 300 7pt "Ubuntu";
   text-decoration: underline;
 }
-.content__article:hover.edit:before {
-  position: absolute;
-  display: inline-block;
-  margin: 5px;
-  content: '';
-  width: 50px;
-  height: 50px;
-  top: 0;
-  right: 0;
-  background: url(../img/icon-edit.png), rgba(255, 255, 255, 0.8);
-  background-position: center center;
-  background-repeat: no-repeat;
-  z-index: 3;
-  cursor: pointer;
-}
 footer {
   font: 400 9pt "Ubuntu";
 }
 footer .developer {
   color: #FDF5E6;
   font-size: 1.1em;
-}
-.likes__ .content__article:hover:after {
-  display: none;
 }
 .items-amount {
   position: absolute;
