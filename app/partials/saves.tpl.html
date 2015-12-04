@@ -8,7 +8,7 @@
                 <img src="{{news.nyt_domain + searchItem.multimedia[0].url}}" width="{{searchItem.multimedia[0].width}}" height="{{searchItem.multimedia[0].height}}" alt=""/>
             </a>
 
-            <h2 class="article__heading">{{searchItem.headline.main}}</h2>
+            <h2 class="article__heading" ng-hide="editorEnabled">{{searchItem.headline.main}}</h2>
 
             <p class="byline">{{searchItem.byline.original}}<span class="update-date"> {{news.parseDate(searchItem.pub_date)}}</span></p>
 
