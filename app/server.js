@@ -27,24 +27,72 @@ server = new http.Server(function( req, res ) {
     if (req.url == '/saves') {
         res.statusCode = 200;
         res.end( JSON.stringify( storage ) );
+    } else if ( req.url == '/edit') {
+
+        req.on( 'data', function ( data ) {
+            var edited = JSON.parse( data.toString() );
+
+            for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
+                if (storage.saves[i]._id === edited._id ) {
+                    storage.saves[ i ] = edited;
+                    break;
+                }
+            }
+            fs.writeFile( 'database.json', JSON.stringify( storage ) );
+
+            res.statusCode = 200;
+            res.end( JSON.stringify( storage ) );
+
+        });
+
+        req.on('end', function() {
+            res.statusCode = 200;
+            res.end( 'End success' );
+        });
+
+    } else if ( req.url == '/remove' ) {
+
+        req.on( 'data', function ( data ) {
+            var removed = JSON.parse( data.toString() );
+
+            for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
+                if (storage.saves[i]._id === removed._id ) {
+                    storage.saves.splice( i, 1 );
+                    storage.storageLength -= 1;
+                    break;
+                }
+            }
+            fs.writeFile( 'database.json', JSON.stringify( storage ) );
+
+            res.statusCode = 200;
+            res.end( JSON.stringify( storage ) );
+
+        });
+
+        req.on('end', function() {
+            res.statusCode = 200;
+            res.end( 'End success' );
+        });
+
+    } else if ( req.url == '/post' ) {
+        req.on('data', function (data) {
+
+            storage.saves[ storage.storageLength ] = JSON.parse( data.toString());
+
+            storage.storageLength += 1;
+
+            fs.writeFile( 'database.json', JSON.stringify( storage ) );
+
+            res.statusCode = 200;
+            res.end( JSON.stringify( storage ) );
+        });
+
+        req.on('end', function() {
+            res.statusCode = 200;
+            res.end( 'End success' );
+        });
     }
 
-    req.on('data', function (data) {
-
-        storage.saves[ storage.storageLength ] = JSON.parse( data.toString());
-
-        storage.storageLength += 1;
-
-        fs.writeFile( 'database.json', JSON.stringify( storage ) );
-
-        res.statusCode = 200;
-        res.end( JSON.stringify( storage ) );
-    });
-
-    req.on('end', function() {
-        res.statusCode = 200;
-        res.end( 'End success' );
-    });
 });
 
 server.listen(port, host, function() {

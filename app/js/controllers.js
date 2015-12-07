@@ -8,7 +8,7 @@ angular.module('crudAppControllers', [])
         var vm = this;
 
         vm.api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254';
-
+        vm.nyt_domain = 'http://www.nytimes.com/';
         vm.checkEmpty = function (list) {
             return list[0] !== null;
         };
@@ -33,7 +33,37 @@ angular.module('crudAppControllers', [])
                 .error( function ( error ) {
                     console.log( error );
                 });
-        }
+        };
+
+        vm.removeFromSaved = function ( index ) {
+            var removed = vm.results.splice( index, 1);
+
+            $http.post( 'http://localhost:4000/remove', JSON.stringify( removed[0] )).then( function ( res ) {
+                $scope.storageLength -= 1;
+                console.log( res );
+            });
+        };
+
+
+        // to delete - duplicate!
+        vm.parseDate = function ( date ) {
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Now', 'Dec'],
+                publish_date = new Date( date),
+                month = months[ publish_date.getMonth() ],
+                days = publish_date.getDate(),
+                hours = publish_date.getHours(),
+                mins = publish_date.getMinutes();
+
+            function toCorrectTime( time ) {
+                if ( time.toString().length !== 2 ) {
+                    return '0' + time;
+                } else {
+                    return time;
+                }
+            }
+
+            return month + ' ' + days + ' at ' + toCorrectTime( hours ) + ':' + toCorrectTime( mins );
+        };
 
     }])
 
@@ -41,8 +71,8 @@ angular.module('crudAppControllers', [])
         var vm = this;
 
         vm.catagories = [];
-        vm.nyt_domain = 'http://www.nytimes.com/';
         $scope.selection = [];
+        vm.nyt_domain = 'http://www.nytimes.com/';
 
         Categories.fetch( function ( res ) {
             angular.forEach( res.results, function ( idx ) {
@@ -135,6 +165,8 @@ angular.module('crudAppControllers', [])
                     console.log(error);
                 });
         };
+
+
 
         $scope.getIp = function () {
             $http.get('http://jsonip.com')

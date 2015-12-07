@@ -235,6 +235,7 @@ form {
   margin-bottom: 10px;
 }
 .content .content__article .byline {
+  display: inline-block;
   font-size: 11px;
   line-height: 14px;
   color: #808080;
@@ -255,6 +256,7 @@ form {
   text-overflow: ellipsis;
 }
 .content .content__article .update-date {
+  display: block;
   margin-left: 3px;
   color: #a81817;
   font-size: 11px;
