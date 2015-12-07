@@ -1,20 +1,8 @@
 <div class="view likes__">
-    <h2>My favourites:</h2>
-
     <div class="items-amount">{{storageLength}}</div>
-    <div ng-show="saves.hasItems" class="content">
-        <article class="content__article edit" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in saves.results track by $index">
-            <a href="{{searchItem.web_url}}" ng-if="searchItem.multimedia[0]">
-                <img src="{{news.nyt_domain + searchItem.multimedia[0].url}}" width="{{searchItem.multimedia[0].width}}" height="{{searchItem.multimedia[0].height}}" alt=""/>
-            </a>
 
-            <h2 class="article__heading" ng-hide="editorEnabled">{{searchItem.headline.main}}</h2>
-
-            <p class="byline">{{searchItem.byline.original}}<span class="update-date"> {{news.parseDate(searchItem.pub_date)}}</span></p>
-
-            <p class="summary">{{searchItem.lead_paragraph}}</p>
-
-            <span class="hashtag" ng-repeat="key in searchItem.keywords">#{{key.value}} </span>
+    <div ng-if="storageLength" class="content">
+        <article saved-item class="content__article" ng-repeat="searchItem in saves.results track by $index">
         </article>
     </div>
 </div>
