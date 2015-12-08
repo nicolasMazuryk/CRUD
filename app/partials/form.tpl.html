@@ -63,9 +63,9 @@
 
         </article>
 
-        <uib-pagination ng-show="news.resultLengthEnabled" ng-change="news.pagination.setPage()" total-items="news.pagination.totalItems" ng-model="news.pagination.currentPage" class="pagination-md" items-per-page="{{news.searchResultView ? 10 : 20 }}" max-size="12" boundary-links="true"></uib-pagination>
 
     </div>
+    <uib-pagination ng-show="news.resultLengthEnabled" ng-change="news.pagination.setPage()" total-items="news.pagination.totalItems" ng-model="news.pagination.currentPage" class="pagination-md" items-per-page="{{news.searchResultView ? 10 : 20 }}" max-size="12" ></uib-pagination>
 
 
 </div>

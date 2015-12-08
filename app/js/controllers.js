@@ -160,7 +160,24 @@ angular.module('crudAppControllers', [])
 
         $scope.addToSaves = function (event) {
 
-            $http.post('http://localhost:4000/post', JSON.stringify(event))
+            var StoreItem = function () {
+                    this.keywords = [{}];
+                    this.headline = {};
+                    this.byline = {};
+
+                    this.web_url = event.url;
+                    this.multimedia = event.multimedia;
+                    this.headline.main = event.title;
+                    this.byline.original = event.byline;
+                    this.pub_date = event.published_date;
+                    this.lead_paragraph = event.abstract;
+                    this.keywords[0].value = event.des_facet[0];
+                    this.user_ownership = false;
+                },
+
+                post_item = event.updated_date ? new StoreItem() : event;
+
+            $http.post('http://localhost:4000/post', JSON.stringify(post_item))
 
                 .success(function (res) {
                     $scope.storageLength = res.storageLength;
@@ -172,7 +189,7 @@ angular.module('crudAppControllers', [])
         };
     }])
 
-    .controller('createArticleCtrl', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance, item) {
+    .controller('createArticleCtrl', ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance ) {
 
         var AddArticle = function () {
             this.multimedia = [{}];
