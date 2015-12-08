@@ -3,13 +3,14 @@
 /* App Module */
 
 angular.module( 'crudApp', [
+    'ui.bootstrap',
+    'angular-spinkit',
     'crudAppControllers',
     'crudAppDirectives',
     //'crudAppFilters',
     'crudAppServices',
     'ngRoute',
-    'ngResource',
-    'angular-spinkit'
+    'ngResource'
 ])
 
     .config( [ '$routeProvider', function ( $routeProvider ) {

@@ -1,0 +1,46 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">New Article</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <label>
+                Source (URL):
+                <input type="text" ng-model="newSource" />
+            </label>
+            <label>
+                Image (URL):
+                <input type="text" ng-model="newImage" />
+            </label>
+            <label>
+                Width (px):
+                <input type="text" ng-model="newWidth" />
+            </label>
+            <label>
+                Height (px):
+                <input type="text" ng-model="newHeight" />
+            </label>
+            <label>
+                Title:
+                <input type="text" ng-model="newTitle" />
+            </label>
+            <label>
+                Author:
+                <input type="text" ng-model="newAuthor" />
+            </label>
+
+            <label>
+                Summary:
+                <input type="text" ng-model="newSummary" />
+            </label>
+            <label>
+                Hashtag:
+                <input type="text" ng-model="newHashtag" />
+            </label>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</div>

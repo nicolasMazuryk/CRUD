@@ -1,8 +1,11 @@
 <div class="view likes__">
     <div class="items-amount">{{storageLength}}</div>
 
+    <button type="button" class="btn btn-default" ng-click="open()">Create article</button>
+
     <div ng-if="storageLength" class="content">
         <article saved-item class="content__article" ng-repeat="searchItem in saves.results track by $index">
         </article>
     </div>
+
 </div>
