@@ -4,9 +4,10 @@
 
 angular.module('crudAppControllers', [])
 
-    .controller('savesTplCtrl', [ '$scope', '$http', function ( $scope, $http) {
+    .controller('savesTplCtrl', [ '$scope', '$http', 'ParseDate', function ( $scope, $http, ParseDate) {
         var vm = this;
 
+        vm.parseDate = ParseDate;
         vm.api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254';
         vm.nyt_domain = 'http://www.nytimes.com/';
         vm.checkEmpty = function (list) {
@@ -44,32 +45,12 @@ angular.module('crudAppControllers', [])
             });
         };
 
-
-        // to delete - duplicate!
-        vm.parseDate = function ( date ) {
-            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Now', 'Dec'],
-                publish_date = new Date( date),
-                month = months[ publish_date.getMonth() ],
-                days = publish_date.getDate(),
-                hours = publish_date.getHours(),
-                mins = publish_date.getMinutes();
-
-            function toCorrectTime( time ) {
-                if ( time.toString().length !== 2 ) {
-                    return '0' + time;
-                } else {
-                    return time;
-                }
-            }
-
-            return month + ' ' + days + ' at ' + toCorrectTime( hours ) + ':' + toCorrectTime( mins );
-        };
-
     }])
 
-    .controller('newsRequestCtrl', [ '$scope', '$http', 'Categories', function ( $scope, $http, Categories) {
+    .controller('newsRequestCtrl', [ '$scope', '$http', 'Categories', 'ParseDate', function ( $scope, $http, Categories, ParseDate ) {
         var vm = this;
 
+        vm.parseDate = ParseDate;
         vm.catagories = [];
         $scope.selection = [];
         vm.nyt_domain = 'http://www.nytimes.com/';
@@ -98,29 +79,7 @@ angular.module('crudAppControllers', [])
                     vm.results = res.data.response.docs;
                     vm.resultsLength = res.data.response.meta.hits;
                     vm.searchResultView = true;
-                })
-
-
-        };
-
-
-        vm.parseDate = function ( date ) {
-            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Now', 'Dec'],
-                publish_date = new Date( date),
-                month = months[ publish_date.getMonth() ],
-                days = publish_date.getDate(),
-                hours = publish_date.getHours(),
-                mins = publish_date.getMinutes();
-
-            function toCorrectTime( time ) {
-                if ( time.toString().length !== 2 ) {
-                    return '0' + time;
-                } else {
-                    return time;
-                }
-            }
-
-            return month + ' ' + days + ' at ' + toCorrectTime( hours ) + ':' + toCorrectTime( mins );
+                });
         };
 
         vm.getLastNews = function () {
@@ -164,23 +123,6 @@ angular.module('crudAppControllers', [])
                 .error(function (error) {
                     console.log(error);
                 });
-        };
-
-
-
-        $scope.getIp = function () {
-            $http.get('http://jsonip.com')
-                .success(function (res) {
-                    $scope.userIP = res.ip;
-                });
-        };
-
-        $scope.googleSpreadsheetDB = function () {
-            $http.get('https://spreadsheets.google.com/feeds/list/1fkwuxv7qZtfELBEr6q10dQaYxxssiyoQ2M3UoTYvYDk/od6/public/values?alt=json')
-                .success(function (res) {
-                    $scope.spreadsheetKey = res.feed.entry[0].gsx$column.$t;
-                    $scope.spreadsheetValue = res.feed.entry[0].gsx$desc.$t;
-                })
         };
     }])
 

@@ -4,11 +4,27 @@
 
 angular.module( 'crudAppServices', [ 'ngResource'])
 
-    .factory( 'ipService', [ '$resource', function( $resource ) {
-        return $resource( 'http://jsonip.com', {}, {
-            query: { method: 'GET' }
-        })
-    }])
+    .service( 'ParseDate', function () {
+
+        function toCorrectTime( time ) {
+            if ( time.toString().length !== 2 ) {
+                return '0' + time;
+            } else {
+                return time;
+            }
+        }
+
+        return function ( date ) {
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Now', 'Dec'],
+                publish_date = new Date( date),
+                month = months[ publish_date.getMonth() ],
+                days = publish_date.getDate(),
+                hours = publish_date.getHours(),
+                mins = publish_date.getMinutes();
+
+            return month + ' ' + days + ' at ' + toCorrectTime( hours ) + ':' + toCorrectTime( mins );
+        };
+    } )
 
     .factory( 'Categories', ['$resource', function ( $resource ) {
         var api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254';
@@ -25,8 +41,6 @@ angular.module( 'crudAppServices', [ 'ngResource'])
     .service('requestReview', ['$resource', '$http',
 
         function ($resource) {
-
-
             return $resource("http://localhost:1337/itunes.apple.com/search?term=:query", {query: '' }, {
                 fetch: {
                     method: 'GET',

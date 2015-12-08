@@ -4,39 +4,12 @@
 
 angular.module( 'crudAppDirectives', [])
 
-    .directive('routeLoadingIndicator', [ '$rootScope', function ( $rootScope ) {
-        return {
-            restrict: 'A',
-            template: '<div ng-show="isRouteLoading" class="loading-indicator">' +
-            '<div class="loading-indicator-body">' +
-            '<div class="spinner"><rotating-plane-spinner>' +
-            '</rotating-plane-spinner>' +
-            '</div>' +
-            '</div>' +
-            '</div>',
-            replace: true,
-            link: function ( scope, element ) {
-                scope.isRouteLoading = false;
-
-                $rootScope.$on( '$routeChangeStart', function () {
-                    scope.isRouteLoading = true;
-                    element.show();
-                });
-
-                $rootScope.$on( '$routeChangeSuccess', function () {
-                    scope.isRouteLoading = false;
-                    element.hide();
-                });
-            }
-        }
-    }] )
-
     .directive( 'savedItem',[ '$http', function ( $http ) {
         return {
             restrict: 'A',
             template:
                 // href={{searchItem.web_url}}
-            '<a href="" ng-click="enableEditor( $index, \'image\' )" ng-hide="editorEnabled.image" ng-if="searchItem.multimedia[0]">' +
+            '<a href="" ng-click="enableEditor( $index, \'image\', $event )" ng-hide="editorEnabled.image" ng-if="searchItem.multimedia[0]">' +
                 '<img src="{{saves.nyt_domain + searchItem.multimedia[0].url}}" width="{{searchItem.multimedia[0].width}}" height="{{searchItem.multimedia[0].height}}" alt=""/>' +
             '</a>' +
             '<div ng-show="editorEnabled.image">' +
@@ -48,15 +21,15 @@ angular.module( 'crudAppDirectives', [])
                 '<button ng-click="disableEditor( \'image\' )">Cancel</button>' +
             '</div>' +
 
-            '<h2 class="article__heading" ng-click="enableEditor( $index, \'title\' )" ng-hide="editorEnabled.title">{{searchItem.headline.main}}</h2>' +
+            '<h2 class="article__heading" ng-click="enableEditor( $index, \'title\', $event )" ng-hide="editorEnabled.title">{{searchItem.headline.main}}</h2>' +
             '<div ng-show="editorEnabled.title">' +
                 '<input type="text" ng-model="editableField" />' +
                 '<button ng-click="save($index, \'title\')">Save</button>' +
                 '<button ng-click="disableEditor( \'title\' )">Cancel</button>' +
             '</div>' +
 
-            '<p class="byline" ng-click="enableEditor( $index, \'byline\' )" ng-hide="editorEnabled.byline">{{searchItem.byline.original}}</p>' +
-            '<span class="update-date" ng-click="enableEditor( $index, \'pub_date\' )" ng-hide="editorEnabled.pub_date"> {{saves.parseDate(searchItem.pub_date)}}</span>' +
+            '<p class="byline" ng-click="enableEditor( $index, \'byline\', $event )" ng-hide="editorEnabled.byline">{{searchItem.byline.original}}</p>' +
+            '<span class="update-date" ng-click="enableEditor( $index, \'pub_date\', $event )" ng-hide="editorEnabled.pub_date"> {{saves.parseDate(searchItem.pub_date)}}</span>' +
 
             '<div ng-show="editorEnabled.byline">' +
                 '<input type="text" ng-model="editableField" />' +
@@ -70,7 +43,7 @@ angular.module( 'crudAppDirectives', [])
                 '<button ng-click="disableEditor( \'pub_date\' )">Cancel</button>' +
             '</div>' +
 
-            '<p class="summary" ng-click="enableEditor( $index, \'summary\' )" ng-hide="editorEnabled.summary">{{searchItem.lead_paragraph}}</p>' +
+            '<p class="summary" ng-click="enableEditor( $index, \'summary\', $event )" ng-hide="editorEnabled.summary">{{searchItem.lead_paragraph}}</p>' +
 
             '<div ng-show="editorEnabled.summary">' +
                 '<textarea ng-model="editableField"></textarea>' +
@@ -78,7 +51,7 @@ angular.module( 'crudAppDirectives', [])
                 '<button ng-click="disableEditor( \'summary\' )">Cancel</button>' +
             '</div>' +
 
-            '<span class="hashtag" ng-click="enableEditor( $parent.$index, \'hashtag\', key )" ng-hide="editorEnabled.hashtag" ng-repeat="(key, val) in searchItem.keywords">#{{val.value}} </span>' +
+            '<span class="hashtag" ng-click="enableEditor( $parent.$index, \'hashtag\', $event, key )" ng-hide="editorEnabled.hashtag" ng-repeat="(key, val) in searchItem.keywords">#{{val.value}} </span>' +
 
             '<div ng-show="editorEnabled.hashtag">' +
                 '<input type="text" ng-model="editableField" />' +
@@ -89,7 +62,7 @@ angular.module( 'crudAppDirectives', [])
 
             controller: 'savesTplCtrl',
             link: function ( scope, elem, attrs, ctrl ) {
-                var current_hashtag;
+                var current_hashtag, $event_target;
 
                 scope.editorEnabled = {
                     image: false,
@@ -100,9 +73,11 @@ angular.module( 'crudAppDirectives', [])
                     hashtag: false
                 };
 
-                scope.enableEditor = function ( index, item, hashtag_idx ) {
-                    current_hashtag = hashtag_idx;
+                scope.enableEditor = function ( index, item, $event, hashtag_idx ) {
+
                     scope.editorEnabled[ item ] = true;
+                    current_hashtag = hashtag_idx;
+                    $event_target = $event.target;
 
                     switch ( item ) {
                     case 'image':
@@ -126,6 +101,10 @@ angular.module( 'crudAppDirectives', [])
                     case 'hashtag':
                         scope.editableField = ctrl.results[ index].keywords[ hashtag_idx].value;
                     }
+                };
+
+                scope.disableEditor = function ( item ) {
+                    scope.editorEnabled[item] = false;
                 };
 
                 scope.save = function ( index, item ) {
@@ -154,21 +133,14 @@ angular.module( 'crudAppDirectives', [])
                             break;
                     }
 
-                    scope.disableEditor( item );
                     $http.post( 'http://localhost:4000/edit', JSON.stringify( ctrl.results[index])).then( function ( res ) {
-                        console.log( ctrl.results );
-                        console.log( res.data.saves );
-
                         ctrl.results = res.data.saves;
-
                     });
 
-                };
+                    $event_target.innerHTML = scope.editableField;
 
-                scope.disableEditor = function ( item ) {
-                    scope.editorEnabled[item] = false;
+                    scope.disableEditor( item );
                 };
-
             }
         }
     }])
