@@ -4,6 +4,25 @@
 
 angular.module( 'crudAppServices', [ 'ngResource'])
 
+    .service( 'PickImage', function() {
+        var sizeSettings = {
+            'thumbnail': 75,
+            'wide': 190,
+            'xlarge': 440
+        };
+
+        return function ( arr, size ) {
+
+            for (var i = 0, l = arr.length; i < l; i += 1) {
+                if (sizeSettings[ size ] === arr[ i ].width ) {
+                    return arr[ i ];
+                } else if ( size === 'xlarge' && sizeSettings[ size ] < arr[ i ].width) {
+                    return arr[ i ];
+                }
+            }
+        }
+    })
+
     .service( 'ParseDate', function () {
 
         function toCorrectTime( time ) {

@@ -4,10 +4,11 @@
 
 angular.module('crudAppControllers', [])
 
-    .controller('savesTplCtrl', ['$scope', '$http', 'ParseDate', '$uibModal', function ($scope, $http, ParseDate, $uibModal) {
+    .controller('savesTplCtrl', ['$scope', '$http', 'ParseDate', 'PickImage', '$uibModal', function ($scope, $http, ParseDate, PickImage, $uibModal) {
         var vm = this;
 
         vm.parseDate = ParseDate;
+        vm.pickImage = PickImage;
         vm.api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254';
         vm.nyt_domain = 'http://www.nytimes.com/';
         vm.checkEmpty = function (list) {
@@ -72,10 +73,11 @@ angular.module('crudAppControllers', [])
         };
     }])
 
-    .controller('newsRequestCtrl', ['$scope', '$http', 'Categories', 'ParseDate', function ($scope, $http, Categories, ParseDate) {
+    .controller('newsRequestCtrl', ['$scope', '$http', 'Categories', 'ParseDate', 'PickImage', function ($scope, $http, Categories, ParseDate, PickImage) {
         var vm = this;
 
         vm.parseDate = ParseDate;
+        vm.pickImage = PickImage;
         vm.catagories = [];
         $scope.selection = [];
         vm.nyt_domain = 'http://www.nytimes.com/';
@@ -104,6 +106,8 @@ angular.module('crudAppControllers', [])
             }
         };
         vm.getSearchResult = function () {
+            vm.pagination.currentPage = vm.searchResultView ? vm.pagination.currentPage : 1;
+
             var api_key_search = '518a9cd9ce5245242456a5c4c29996bc:14:73615254',
                 query = encodeURIComponent(vm.formSearch),
                 url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
@@ -124,6 +128,8 @@ angular.module('crudAppControllers', [])
         };
 
         vm.getLastNews = function () {
+            vm.pagination.currentPage = vm.searchResultView ? 1 : vm.pagination.currentPage;
+
             var api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254',
                 section_encoded = [],
                 offset = (vm.pagination.currentPage * 20) - 20,
