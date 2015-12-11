@@ -9,8 +9,8 @@ angular.module( 'crudAppDirectives', [])
             restrict: 'A',
             template:
                 // href={{searchItem.web_url}}
-            '<a href="" ng-click="enableEditor( $index, \'image\', $event )" ng-hide="editorEnabled.image" ng-if="searchItem.multimedia[0]">' +
-                '<img src="{{saves.nyt_domain + searchItem.multimedia[0].url}}" width="{{searchItem.multimedia[0].width}}" height="{{searchItem.multimedia[0].height}}" alt=""/>' +
+            '<a href="" ng-click="enableEditor( $index, \'image\', $event )" ng-hide="editorEnabled.image" ng-if="saves.pickImage(searchItem.multimedia, \'wide\')">' +
+                '<img src="{{saves.pickImage(searchItem.multimedia, \'wide\').url}}" width="{{saves.pickImage(searchItem.multimedia, \'wide\').width}}" height="{{saves.pickImage(searchItem.multimedia, \'wide\').height}}" alt=""/>' +
             '</a>' +
             '<div ng-show="editorEnabled.image">' +
                 '<input type="text" ng-model="editSource" />' +

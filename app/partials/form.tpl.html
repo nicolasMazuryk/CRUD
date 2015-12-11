@@ -35,7 +35,7 @@
         <article ng-show="news.searchResultView" class="content__article" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">
 
             <a href="{{searchItem.web_url}}" ng-if="news.pickImage(searchItem.multimedia, 'wide')">
-                <img src="{{news.nyt_domain + news.pickImage(searchItem.multimedia, 'wide').url}}" width="{{news.pickImage(searchItem.multimedia, 'wide').width}}" height="{{news.pickImage(searchItem.multimedia, 'wide').height}}" alt=""/>
+                <img src="{{news.pickImage(searchItem.multimedia, 'wide').url}}" width="{{news.pickImage(searchItem.multimedia, 'wide').width}}" height="{{news.pickImage(searchItem.multimedia, 'wide').height}}" alt=""/>
             </a>
 
             <h2 class="article__heading">{{searchItem.headline.main}}</h2>

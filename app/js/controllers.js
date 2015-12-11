@@ -10,7 +10,6 @@ angular.module('crudAppControllers', [])
         vm.parseDate = ParseDate;
         vm.pickImage = PickImage;
         vm.api_key_newswire = 'e0f8394cfce0075281d1a3b8423a9d6c:17:73615254';
-        vm.nyt_domain = 'http://www.nytimes.com/';
         vm.checkEmpty = function (list) {
             return list[0] !== null;
         };
@@ -80,7 +79,6 @@ angular.module('crudAppControllers', [])
         vm.pickImage = PickImage;
         vm.catagories = [];
         $scope.selection = [];
-        vm.nyt_domain = 'http://www.nytimes.com/';
         vm.resultLengthEnabled = false;
 
         Categories.fetch(function (res) {
