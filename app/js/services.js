@@ -10,17 +10,18 @@ angular.module( 'crudAppServices', [ 'ngResource'])
             'wide': 190,
             'xlarge': 440
             },
+            protocol = 'http',
             domain = 'https://www.nytimes.com/';
 
         return function ( arr, size ) {
 
             for (var i = 0, l = arr.length; i < l; i += 1) {
                 if (sizeSettings[ size ] === arr[ i ].width ) {
-                    arr[i].url = (arr[i].url.slice(0, 24) === domain && arr[i].legacy) ? arr[i].url : domain + arr[i].url;
+                    arr[i].url = (arr[i].url.slice(0, 4) !== protocol && !arr[i].format) ? domain + arr[i].url : arr[i].url;
                     return arr[ i ];
 
                 } else if ( size === 'xlarge' && sizeSettings[ size ] < arr[ i ].width) {
-                    arr[i].url = (arr[i].url.slice(0, 24) === domain && arr[i].legacy) ? arr[i].url : domain + arr[i].url;
+                    arr[i].url = (arr[i].url.slice(0, 4) !== protocol && !arr[i].format) ? domain + arr[i].url : arr[i].url;
 
                     return arr[ i ];
                 }
