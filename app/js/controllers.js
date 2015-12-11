@@ -17,6 +17,8 @@ angular.module('crudAppControllers', [])
         $http.get('https://crud-it.herokuapp.com/saves')
             .success(function (data) {
 
+                var data = JSON.parse( data );
+
                 console.log('Data on entry of Saves: ', data );
 
                 vm.hasItems = vm.checkEmpty(data.saves);
