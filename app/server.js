@@ -1,5 +1,6 @@
 var http = require('http'),
     fs = require('fs'),
+    qs = require('querystring'),
     database = require( './database.json'),
     path = require('path'),
     mime = require('mime'),
@@ -92,7 +93,7 @@ server = new http.Server(function( req, res ) {
             //console.log('data to string: ', data.toString());
             //console.log('JSON.parse data.toString: ', JSON.parse(data.toString()));
 
-            storage.saves[ storage.storageLength ] = JSON.parse( data );
+            storage.saves[ storage.storageLength ] = qs.parse( data.toString());
 
             storage.storageLength += 1;
 
