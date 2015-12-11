@@ -17,7 +17,7 @@ angular.module('crudAppControllers', [])
         $http.get('https://crud-it.herokuapp.com/saves')
             .success(function (data) {
 
-                var res = JSON.parse( data );
+                var res = JSON.parse( data.toString() );
 
                 console.log('Data on entry of Saves: ', res );
 
