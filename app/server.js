@@ -43,7 +43,7 @@ server = new http.Server(function( req, res ) {
     } else if ( req.url == '/edit') {
 
         req.on( 'data', function ( data ) {
-            var edited = JSON.parse( data.toString() );
+            var edited = qs.parse( data.toString() );
 
             for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
                 if (storage.saves[i]._id === edited._id ) {
@@ -66,7 +66,7 @@ server = new http.Server(function( req, res ) {
     } else if ( req.url == '/remove' ) {
 
         req.on( 'data', function ( data ) {
-            var removed = JSON.parse( data.toString() );
+            var removed = qs.parse( data.toString() );
 
             for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
                 if (storage.saves[i]._id === removed._id ) {
@@ -89,9 +89,6 @@ server = new http.Server(function( req, res ) {
 
     } else if ( req.url == '/post' ) {
         req.on('data', function (data) {
-            //console.log('Length: ', storage.storageLength );
-            //console.log('data to string: ', data.toString());
-            //console.log('JSON.parse data.toString: ', JSON.parse(data.toString()));
 
             storage.saves[ storage.storageLength ] = qs.parse( data.toString());
 
