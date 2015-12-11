@@ -1,12 +1,14 @@
 var http = require('http'),
     fs = require('fs'),
     database = require( './database.json'),
+    path = require('path'),
+    mime = require('mime'),
     port = process.env.PORT || 4000,
     host = process.env.HOST || '0.0.0.0',
     storage,
-    server,
+    server;
 
-    DatabaseInit = function () {
+var DatabaseInit = function () {
 
         this.storageLength = database.storageLength ?
             database.storageLength : 0;
@@ -23,6 +25,19 @@ server = new http.Server(function( req, res ) {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST', 'PUT', 'DELETE');
+
+    if (req.url == '/') {
+        fs.readFile( path.join(__dirname, 'index.html') , function ( err, data ) {
+            if ( err ) {
+                res.statusCode = 404;
+                res.end('The browser cannot load the page from server. Sorry for that');
+            }
+
+            res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
+            res.end( data );
+        });
+    }
+
 
     if (req.url == '/saves') {
         res.statusCode = 200;
