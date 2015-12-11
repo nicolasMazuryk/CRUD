@@ -21,9 +21,9 @@ storage = new DatabaseInit();
 
 
 server = new http.Server(function( req, res ) {
-    console.log( req.headers.origin);
+    //console.log( req.headers.origin);
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Origin', 'req');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST', 'PUT', 'DELETE');
 
     if (req.url == '/') {
