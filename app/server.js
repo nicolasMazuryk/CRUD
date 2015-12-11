@@ -36,20 +36,7 @@ server = new http.Server(function( req, res ) {
             res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
             res.end( data );
         });
-    } else {
-        fs.readFile( path.join(__dirname, './' + req.url) , function ( err, data ) {
-            if ( err ) {
-                res.statusCode = 404;
-                res.end('The browser cannot load the page from server. Sorry for that');
-            }
-
-            res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, './' + req.url))))});
-            res.end( data );
-        });
-    }
-
-
-    if (req.url == '/saves') {
+    } else if (req.url == '/saves') {
         res.statusCode = 200;
         res.end( JSON.stringify( storage ) );
     } else if ( req.url == '/edit') {
@@ -115,6 +102,16 @@ server = new http.Server(function( req, res ) {
         req.on('end', function() {
             res.statusCode = 200;
             res.end( 'End success' );
+        });
+    } else {
+        fs.readFile( path.join(__dirname, './' + req.url) , function ( err, data ) {
+            if ( err ) {
+                res.statusCode = 404;
+                res.end('The browser cannot load the page from server. Sorry for that');
+            }
+
+            res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, './' + req.url))))});
+            res.end( data );
         });
     }
 
