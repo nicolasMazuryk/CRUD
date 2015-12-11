@@ -88,11 +88,11 @@ server = new http.Server(function( req, res ) {
 
     } else if ( req.url == '/post' ) {
         req.on('data', function (data) {
-            console.log('Length: ', storage.storageLength );
-            console.log('data to string: ', data.toString());
-            console.log('JSON.parse data.toString: ', JSON.parse(data));
+            //console.log('Length: ', storage.storageLength );
+            //console.log('data to string: ', data.toString());
+            //console.log('JSON.parse data.toString: ', JSON.parse(data.toString()));
 
-            storage.saves[ storage.storageLength ] = JSON.parse( data);
+            storage.saves[ storage.storageLength ] = JSON.parse( data.toString());
 
             storage.storageLength += 1;
 
