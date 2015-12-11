@@ -17,14 +17,14 @@ angular.module('crudAppControllers', [])
         $http.get('https://crud-it.herokuapp.com/saves')
             .success(function (data) {
 
-                var data = JSON.parse( data );
+                var res = JSON.parse( data );
 
-                console.log('Data on entry of Saves: ', data );
+                console.log('Data on entry of Saves: ', res );
 
-                vm.hasItems = vm.checkEmpty(data.saves);
+                vm.hasItems = vm.checkEmpty(res.saves);
 
-                vm.results = data.saves;
-                $scope.storageLength = data.storageLength;
+                vm.results = res.saves;
+                $scope.storageLength = res.storageLength;
             })
             .error(function (error) {
                 console.log(error);
