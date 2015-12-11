@@ -108,10 +108,10 @@ server = new http.Server(function( req, res ) {
             if ( err ) {
                 res.statusCode = 404;
                 res.end('The browser cannot load the page from server. Sorry for that');
+            } else {
+                res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, './' + req.url))))});
+                res.end( data );
             }
-
-            res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, './' + req.url))))});
-            res.end( data );
         });
     }
 
