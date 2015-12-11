@@ -14,7 +14,7 @@ angular.module('crudAppControllers', [])
             return list[0] !== null;
         };
 
-        $http.get('http://localhost:4000/saves')
+        $http.get('/saves')
             .success(function (data) {
                 vm.hasItems = vm.checkEmpty(data.saves);
 
@@ -27,7 +27,7 @@ angular.module('crudAppControllers', [])
 
         vm.getSpecificArticle = function (path) {
 
-            $http.get('http://api.nytimes.com/svc/news/v3/content?url=' + path + '&api-key=' + vm.api_key_newswire)
+            $http.get('https://api.nytimes.com/svc/news/v3/content?url=' + path + '&api-key=' + vm.api_key_newswire)
                 .success(function (res) {
                     console.log(res);
                 })
@@ -39,7 +39,7 @@ angular.module('crudAppControllers', [])
         vm.removeFromSaved = function (index) {
             var removed = vm.results.splice(index, 1);
 
-            $http.post('http://localhost:4000/remove', JSON.stringify(removed[0])).then(function (res) {
+            $http.post('/remove', JSON.stringify(removed[0])).then(function (res) {
                 $scope.storageLength -= 1;
                 console.log(res);
             });
@@ -57,7 +57,7 @@ angular.module('crudAppControllers', [])
             modalInstance.result.then(function (newItem) {
                 vm.results.push(newItem);
 
-                $http.post('http://localhost:4000/post', JSON.stringify(newItem))
+                $http.post('/post', JSON.stringify(newItem))
 
                     .success(function (res) {
                         $scope.storageLength = res.storageLength;
@@ -108,7 +108,7 @@ angular.module('crudAppControllers', [])
 
             var api_key_search = '518a9cd9ce5245242456a5c4c29996bc:14:73615254',
                 query = encodeURIComponent(vm.formSearch),
-                url = "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+                url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
                     query +
                         //"&hl=true" +
                     '&page=' + vm.pagination.currentPage +
@@ -144,7 +144,7 @@ angular.module('crudAppControllers', [])
             sections = section_encoded.join(';');
             complete_sections = sections.replace(regexp_slash, '%2F').replace(regexp_dot, '%2E');
 
-            url = "http://api.nytimes.com/svc/news/v3/content/all/" +
+            url = "https://api.nytimes.com/svc/news/v3/content/all/" +
                 complete_sections +
                 "?offset=" + offset +
                 "&api-key=" +
@@ -181,7 +181,7 @@ angular.module('crudAppControllers', [])
 
                 post_item = event.updated_date ? new StoreItem() : event;
 
-            $http.post('http://localhost:4000/post', JSON.stringify(post_item))
+            $http.post('/post', JSON.stringify(post_item))
 
                 .success(function (res) {
                     $scope.storageLength = res.storageLength;

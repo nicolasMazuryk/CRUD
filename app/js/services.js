@@ -10,7 +10,7 @@ angular.module( 'crudAppServices', [ 'ngResource'])
             'wide': 190,
             'xlarge': 440
             },
-            domain = 'http://www.nytimes.com/';
+            domain = 'https://www.nytimes.com/';
 
         return function ( arr, size ) {
 
