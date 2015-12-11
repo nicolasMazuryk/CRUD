@@ -90,9 +90,9 @@ server = new http.Server(function( req, res ) {
         req.on('data', function (data) {
             console.log('Length: ', storage.storageLength );
             console.log('data to string: ', data.toString());
-            console.log('JSON.parse data.toString: ', JSON.parse(data.toString()));
+            console.log('JSON.parse data.toString: ', JSON.parse(data));
 
-            storage.saves[ storage.storageLength ] = JSON.parse( data.toString());
+            storage.saves[ storage.storageLength ] = JSON.parse( data);
 
             storage.storageLength += 1;
 
