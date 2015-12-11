@@ -14,7 +14,7 @@ angular.module('crudAppControllers', [])
             return list[0] !== null;
         };
 
-        $http.get('/saves')
+        $http.get('https://crud-it.herokuapp.com/saves')
             .success(function (data) {
                 vm.hasItems = vm.checkEmpty(data.saves);
 
@@ -39,7 +39,7 @@ angular.module('crudAppControllers', [])
         vm.removeFromSaved = function (index) {
             var removed = vm.results.splice(index, 1);
 
-            $http.post('/remove', JSON.stringify(removed[0])).then(function (res) {
+            $http.post('https://crud-it.herokuapp.com/remove', JSON.stringify(removed[0])).then(function (res) {
                 $scope.storageLength -= 1;
                 console.log(res);
             });
@@ -57,7 +57,7 @@ angular.module('crudAppControllers', [])
             modalInstance.result.then(function (newItem) {
                 vm.results.push(newItem);
 
-                $http.post('/post', JSON.stringify(newItem))
+                $http.post('https://crud-it.herokuapp.com/post', JSON.stringify(newItem))
 
                     .success(function (res) {
                         $scope.storageLength = res.storageLength;
@@ -181,7 +181,7 @@ angular.module('crudAppControllers', [])
 
                 post_item = event.updated_date ? new StoreItem() : event;
 
-            $http.post('/post', JSON.stringify(post_item))
+            $http.post('https://crud-it.herokuapp.com/post', JSON.stringify(post_item))
 
                 .success(function (res) {
                     $scope.storageLength = res.storageLength;

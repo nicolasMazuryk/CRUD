@@ -133,7 +133,7 @@ angular.module( 'crudAppDirectives', [])
                             break;
                     }
 
-                    $http.post( '/edit', JSON.stringify( ctrl.results[index])).then( function ( res ) {
+                    $http.post( 'https://crud-it.herokuapp.com/edit', JSON.stringify( ctrl.results[index])).then( function ( res ) {
                         ctrl.results = res.data.saves;
                     });
 
