@@ -36,6 +36,16 @@ server = new http.Server(function( req, res ) {
             res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
             res.end( data );
         });
+    } else {
+        fs.readFile( path.join(__dirname, './' + req.url) , function ( err, data ) {
+            if ( err ) {
+                res.statusCode = 404;
+                res.end('The browser cannot load the page from server. Sorry for that');
+            }
+
+            res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, './' + req.url))))});
+            res.end( data );
+        });
     }
 
 
