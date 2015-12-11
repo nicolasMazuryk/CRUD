@@ -92,7 +92,7 @@ server = new http.Server(function( req, res ) {
             //console.log('data to string: ', data.toString());
             //console.log('JSON.parse data.toString: ', JSON.parse(data.toString()));
 
-            storage.saves[ storage.storageLength ] = JSON.parse( data.toString());
+            storage.saves[ storage.storageLength ] = JSON.parse( data );
 
             storage.storageLength += 1;
 
