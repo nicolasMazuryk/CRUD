@@ -23,7 +23,7 @@ storage = new DatabaseInit();
 server = new http.Server(function( req, res ) {
     console.log( req.headers.origin);
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'req');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST', 'PUT', 'DELETE');
 
     if (req.url == '/') {
@@ -88,6 +88,9 @@ server = new http.Server(function( req, res ) {
 
     } else if ( req.url == '/post' ) {
         req.on('data', function (data) {
+            console.log('Length: ', storage.storageLength );
+            console.log('data to string: ', data.toString());
+            console.log('JSON.parse data.toString: ', JSON.parse(data.toString()));
 
             storage.saves[ storage.storageLength ] = JSON.parse( data.toString());
 
