@@ -104,6 +104,8 @@ server = new http.Server(function( req, res ) {
 
             storage.saves[ storage.storageLength ] = JSON.parse( req_body );
 
+
+            console.log( "Parsed req_body: ", JSON.parse( req_body ) );
             console.log( "Storage.saves: ", storage.saves );
 
             storage.storageLength += 1;
