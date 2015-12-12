@@ -102,7 +102,7 @@ server = new http.Server(function( req, res ) {
 
         req.on('end', function() {
 
-            storage.saves[ storage.storageLength ] = qs.parse( req_body );
+            storage.saves[ storage.storageLength ] = JSON.parse( req_body );
 
             console.log( "Storage.saves: ", storage.saves );
 
