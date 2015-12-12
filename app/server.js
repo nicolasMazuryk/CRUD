@@ -92,7 +92,7 @@ server = new http.Server(function( req, res ) {
 
     } else if ( req.url == '/post' ) {
         req.on('data', function (data) {
-
+console.log('Entry data: ', data);
             storage.saves[ storage.storageLength ] = qs.parse( data );
 
             console.log( "Storage.saves: ", storage.saves );

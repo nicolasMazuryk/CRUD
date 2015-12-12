@@ -20,14 +20,14 @@ angular.module('crudAppControllers', [])
 
                 console.log( 'Data: ', data);
 
-                var res = JSON.parse( data );
 
-                console.log('Data on entry of Saves: ', res );
 
-                vm.hasItems = vm.checkEmpty(res.saves);
+                vm.hasItems = vm.checkEmpty(data.saves);
 
-                vm.results = res.saves;
-                $scope.storageLength = res.storageLength;
+                vm.results = data.saves;
+                $scope.storageLength = data.storageLength;
+
+                console.log( 'vm.results is: ', vm.results);
             })
             .error(function (error) {
                 console.log(error);
@@ -191,9 +191,14 @@ angular.module('crudAppControllers', [])
 
                 post_item = event.updated_date ? new StoreItem() : event;
 
+            console.log( 'Post Item: ', post_item );
+
             $http.post('https://crud-it.herokuapp.com/post', JSON.stringify(post_item))
 
                 .success(function (res) {
+
+                    console.log( 'After /post response: ', res);
+
                     $scope.storageLength = res.storageLength;
                 })
 
