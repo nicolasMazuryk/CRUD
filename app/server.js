@@ -94,9 +94,10 @@ server = new http.Server(function( req, res ) {
         req.on('data', function (data) {
 console.log('Entry data: ', '' + data);
 console.log('toString() data: ', data.toString() );
-            storage.saves[ storage.storageLength ] = JSON.parse('' + data);
 
-            console.log( "Storage.saves: ", storage.saves );
+            storage.saves[ storage.storageLength ] = qs.parse('' + data.toString());
+
+console.log( "Storage.saves: ", storage.saves );
 
             storage.storageLength += 1;
 
