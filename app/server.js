@@ -7,6 +7,7 @@ var http = require('http'),
     port = process.env.PORT || 4000,
     host = process.env.HOST || '0.0.0.0',
     storage,
+    req_body = '',
     server;
 
 var DatabaseInit = function () {
@@ -92,14 +93,18 @@ server = new http.Server(function( req, res ) {
 
     } else if ( req.url == '/post' ) {
         req.on('data', function (data) {
-console.log('Entry data: ', '' + data);
-console.log('toString() data: ', data.toString() );
 
-            var obj = qs.parse( data.toString() );
+            req_body += data.toString();
 
-            storage.saves[ storage.storageLength ] = obj;
+            console.log('Chunks: ', req_body );
 
-console.log( "Storage.saves: ", storage.saves );
+        });
+
+        req.on('end', function() {
+
+            storage.saves[ storage.storageLength ] = qs.parse( req_body );
+
+            console.log( "Storage.saves: ", storage.saves );
 
             storage.storageLength += 1;
 
@@ -107,11 +112,6 @@ console.log( "Storage.saves: ", storage.saves );
 
             res.statusCode = 200;
             res.end( JSON.stringify( storage ) );
-        });
-
-        req.on('end', function() {
-            res.statusCode = 200;
-            res.end( 'End success' );
         });
     } else {
         fs.readFile( path.join(__dirname, './' + req.url) , function ( err, data ) {
