@@ -94,9 +94,8 @@ server = new http.Server(function( req, res ) {
         req.on('data', function (data) {
 console.log('Entry data: ', '' + data);
 console.log('toString() data: ', data.toString() );
-            var full = '';
-                full += data.toString();
-            var obj = qs.parse( full );
+
+            var obj = qs.parse( data.toString() );
 
             storage.saves[ storage.storageLength ] = obj;
 
