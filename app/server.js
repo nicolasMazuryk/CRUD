@@ -39,6 +39,9 @@ server = new http.Server(function( req, res ) {
         });
     } else if (req.url == '/saves') {
         res.statusCode = 200;
+
+        console.log('Json.stringify(storage) from server /saves: ', JSON.stringify( storage ) );
+
         res.end( JSON.stringify( storage ) );
     } else if ( req.url == '/edit') {
 
@@ -90,7 +93,9 @@ server = new http.Server(function( req, res ) {
     } else if ( req.url == '/post' ) {
         req.on('data', function (data) {
 
-            storage.saves[ storage.storageLength ] = qs.parse( data.toString());
+            storage.saves[ storage.storageLength ] = qs.parse( data );
+
+            console.log( "Storage.saves: ", storage.saves );
 
             storage.storageLength += 1;
 
