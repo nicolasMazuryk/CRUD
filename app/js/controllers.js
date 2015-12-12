@@ -13,11 +13,14 @@ angular.module('crudAppControllers', [])
         vm.checkEmpty = function (list) {
             return list[0] !== null;
         };
+        debugger;
 
         $http.get('https://crud-it.herokuapp.com/saves')
             .success(function (data) {
 
-                var res = JSON.parse( data.toString() );
+                console.log( 'Data: ', data);
+
+                var res = JSON.parse( data );
 
                 console.log('Data on entry of Saves: ', res );
 
@@ -29,6 +32,8 @@ angular.module('crudAppControllers', [])
             .error(function (error) {
                 console.log(error);
             });
+        debugger;
+        console.log('VMResults: ', vm.results );
 
         vm.getSpecificArticle = function (path) {
 
