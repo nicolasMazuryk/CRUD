@@ -99,15 +99,13 @@ server = new http.Server(function( req, res ) {
 
             body += data;
 
-            console.log('Chunks: ', body );
-
         });
 
         req.on('end', function() {
 
             var data = JSON.parse( body );
 
-            storage.saves.push(data);
+            storage.saves[storage.storageLength] = data;
 
 
             console.log( "Parsed data: ", data );
