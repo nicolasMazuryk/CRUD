@@ -92,20 +92,25 @@ server = new http.Server(function( req, res ) {
         });
 
     } else if ( req.url == '/post' ) {
+
+        var body = '';
+
         req.on('data', function (data) {
 
-            req_body += data.toString();
+            body += data;
 
-            console.log('Chunks: ', req_body );
+            console.log('Chunks: ', body );
 
         });
 
         req.on('end', function() {
 
-            storage.saves[ storage.storageLength ] = JSON.parse( req_body );
+            var data = qs.parse( body );
+
+            storage.saves[ storage.storageLength ] = data;
 
 
-            console.log( "Parsed req_body: ", JSON.parse( req_body ) );
+            console.log( "Parsed data: ", data );
             console.log( "Storage.saves: ", storage.saves );
 
             storage.storageLength += 1;
