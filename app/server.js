@@ -105,9 +105,9 @@ server = new http.Server(function( req, res ) {
 
         req.on('end', function() {
 
-            var data = qs.parse( body );
+            var data = JSON.parse( body );
 
-            storage.saves[ storage.storageLength ] = data;
+            storage.saves.push(data);
 
 
             console.log( "Parsed data: ", data );
