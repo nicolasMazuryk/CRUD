@@ -7,7 +7,7 @@ var http = require('http'),
     port = process.env.PORT || 4000,
     host = process.env.HOST || '0.0.0.0',
     storage,
-    req_body = '',
+    body = '',
     server;
 
 var DatabaseInit = function () {
@@ -29,6 +29,7 @@ server = new http.Server(function( req, res ) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST', 'PUT', 'DELETE');
 
     if (req.url == '/') {
+
         fs.readFile( path.join(__dirname, 'index.html') , function ( err, data ) {
             if ( err ) {
                 res.statusCode = 404;
@@ -38,16 +39,25 @@ server = new http.Server(function( req, res ) {
             res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
             res.end( data );
         });
+
     } else if (req.url == '/saves') {
+
         res.statusCode = 200;
-
-        console.log('Json.stringify(storage) from server /saves: ', JSON.stringify( storage ) );
-
         res.end( JSON.stringify( storage ) );
+
     } else if ( req.url == '/edit') {
 
+        var body = '';
+
         req.on( 'data', function ( data ) {
-            var edited = qs.parse( data.toString() );
+
+            body += data;
+
+        });
+
+        req.on('end', function() {
+
+            var edited = JSON.parse( body );
 
             for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
                 if (storage.saves[i]._id === edited._id ) {
@@ -59,18 +69,20 @@ server = new http.Server(function( req, res ) {
 
             res.statusCode = 200;
             res.end( JSON.stringify( storage ) );
-
-        });
-
-        req.on('end', function() {
-            res.statusCode = 200;
-            res.end( 'End success' );
         });
 
     } else if ( req.url == '/remove' ) {
 
+        var body = '';
+
         req.on( 'data', function ( data ) {
-            var removed = qs.parse( data.toString() );
+            body += data;
+
+        });
+
+        req.on('end', function() {
+
+            var removed = JSON.parse( body );
 
             for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
                 if (storage.saves[i]._id === removed._id ) {
@@ -83,17 +95,11 @@ server = new http.Server(function( req, res ) {
 
             res.statusCode = 200;
             res.end( JSON.stringify( storage ) );
-
-        });
-
-        req.on('end', function() {
-            res.statusCode = 200;
-            res.end( 'End success' );
         });
 
     } else if ( req.url == '/post' ) {
 
-        var body = '';
+        body = '';
 
         req.on('data', function (data) {
 
