@@ -1,14 +1,11 @@
-var http = require('http'),
-    express = require('express'),
+var express = require('express'),
     fs = require('fs'),
-    qs = require('querystring'),
+    mime = require('mime'),
     database = require( './database.json'),
     path = require('path'),
-    mime = require('mime'),
     port = process.env.PORT || 4000,
     host = process.env.HOST || '0.0.0.0',
     storage,
-    //body = '',
     app = express();
 
 app.get('/', function (err, req, res, next ) {
@@ -21,7 +18,7 @@ app.get('/', function (err, req, res, next ) {
             res.end('The browser cannot load the page from server. Sorry for that');
         }
 
-        //res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
+        res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
         res.send( data );
     });
 
