@@ -13,14 +13,16 @@ var http = require('http'),
 
 app.get('/', function (err, req, res, next ) {
 
+    console.log('Request path: ', req.path );
+
     fs.readFile( path.join(__dirname, 'index.html') , function ( err, data ) {
         if ( err ) {
             res.statusCode = 404;
             res.end('The browser cannot load the page from server. Sorry for that');
         }
 
-        res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
-        res.end( data );
+        //res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
+        res.send( data );
     });
 
 });
