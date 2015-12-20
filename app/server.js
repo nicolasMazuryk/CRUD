@@ -10,22 +10,27 @@ var express = require('express'),
 
 app.get('/', function (err, req, res, next ) {
 
-    console.log('Request path: ', req.path );
+    //console.log('Request path: ', req.path );
+    //
+    //fs.readFile( path.join(__dirname, 'index.html') , function ( err, data ) {
+    //    if ( err ) {
+    //        res.statusCode = 404;
+    //        res.end('The browser cannot load the page from server. Sorry for that');
+    //    }
+    //
+    //    res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
+    //    res.send( data );
+    //});
 
-    fs.readFile( path.join(__dirname, 'index.html') , function ( err, data ) {
-        if ( err ) {
-            res.statusCode = 404;
-            res.end('The browser cannot load the page from server. Sorry for that');
-        }
-
-        res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
-        res.send( data );
-    });
+    res.send('Hello, World!');
 
 });
 
+console.log(port);
+console.log(host);
 
-var server = app.listen(port, function () {
+
+var server = app.listen(4000, function () {
     var host = server.address().address,
         port = server.address().port;
 
