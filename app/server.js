@@ -29,7 +29,7 @@ storage = new DatabaseInit();
 
 app.get('/', function (req, res, next ) {
 
-    res.sendfile('/' + '/index.html');
+    res.sendfile(__dirname + '/index.html');
 
 });
 
