@@ -1,52 +1,97 @@
 var express = require('express'),
+    bodyParser = require('body-parser'),
     fs = require('fs'),
-    mime = require('mime'),
     database = require( './database.json'),
-    path = require('path'),
+    //path = require('path'),
     port = process.env.PORT || 4000,
     host = process.env.HOST || '0.0.0.0',
     storage,
     app = express();
 
-app.get('/', function (err, req, res, next ) {
+app.use(express.static(__dirname));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(function ( req, res, next ) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+    next();
+});
 
-    //console.log('Request path: ', req.path );
-    //
-    //fs.readFile( path.join(__dirname, 'index.html') , function ( err, data ) {
-    //    if ( err ) {
-    //        res.statusCode = 404;
-    //        res.end('The browser cannot load the page from server. Sorry for that');
-    //    }
-    //
-    //    res.writeHead(200, {"Content-Type": mime.lookup(path.basename((path.join(__dirname, 'index.html'))))});
-    //    res.send( data );
-    //});
 
-    res.send('Hello, World!');
+var DatabaseInit = function () {
+    this.storageLength = database.storageLength ? database.storageLength : 0;
+
+    this.saves = database.saves ? database.saves : [];
+};
+
+storage = new DatabaseInit();
+
+
+app.get('/', function (req, res, next ) {
+
+    res.sendfile('/' + '/index.html');
 
 });
 
-console.log(port);
-console.log(host);
+app.post('/', function ( req, res, next ) {
+    var data = req.body;
+
+    storage.saves[storage.storageLength] = data;
 
 
-var server = app.listen(4000, function () {
-    var host = server.address().address,
-        port = server.address().port;
+    console.log( "Parsed data: ", data );
+    console.log( "Storage.saves: ", storage.saves );
+
+    storage.storageLength += 1;
+
+    fs.writeFile( 'database.json', JSON.stringify( storage ) );
+
+    res.send( JSON.stringify( storage ));
+});
+
+app.get('/saves', function ( req, res, next ) {
+
+    res.send( JSON.stringify( storage ));
+
+});
+
+app.put('/saves', function ( req, res, next ) {
+    var edited = req.body;
+//
+    for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
+        if (storage.saves[i]._id === edited._id ) {
+            storage.saves[ i ] = edited;
+            break;
+        }
+    }
+    fs.writeFile( 'database.json', JSON.stringify( storage ) );
+
+    res.send( JSON.stringify(storage));
+});
+
+app.delete('/saves', function ( req, res, next ) {
+    var removed = req.body;
+
+    for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
+        if (storage.saves[i]._id === removed._id ) {
+            storage.saves.splice( i, 1 );
+            storage.storageLength -= 1;
+            break;
+        }
+    }
+
+    fs.writeFile( 'database.json', JSON.stringify( storage ) );
+    res.send('Removed!');
+});
+
+
+var server = app.listen(port, function () {
+    var host = server.address().address;
 
     console.log('Server listening at http://' + host + ':' + port);
 });
 
-//var DatabaseInit = function () {
-//
-//        this.storageLength = database.storageLength ?
-//            database.storageLength : 0;
-//
-//        this.saves = database.saves ?
-//            database.saves : [];
-//    };
-//
-//storage = new DatabaseInit();
+
 //
 //
 //server = new http.Server(function( req, res ) {

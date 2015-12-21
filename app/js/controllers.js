@@ -49,7 +49,7 @@ angular.module('crudAppControllers', [])
         vm.removeFromSaved = function (index) {
             var removed = vm.results.splice(index, 1);
 
-            $http.post('https://crud-it.herokuapp.com/remove', JSON.stringify(removed[0])).then(function (res) {
+            $http.delete('https://crud-it.herokuapp.com/saves', JSON.stringify(removed[0])).then(function (res) {
                 $scope.storageLength -= 1;
                 console.log(res);
             });
@@ -67,7 +67,7 @@ angular.module('crudAppControllers', [])
             modalInstance.result.then(function (newItem) {
                 vm.results.push(newItem);
 
-                $http.post('https://crud-it.herokuapp.com/post', JSON.stringify(newItem))
+                $http.post('https://crud-it.herokuapp.com/', JSON.stringify(newItem))
 
                     .success(function (res) {
                         $scope.storageLength = res.storageLength;
@@ -193,7 +193,7 @@ angular.module('crudAppControllers', [])
 
             console.log( 'Post Item: ', post_item );
 
-            $http.post('https://crud-it.herokuapp.com/post', JSON.stringify(post_item))
+            $http.post('https://crud-it.herokuapp.com/', JSON.stringify(post_item))
 
                 .success(function (res) {
 
