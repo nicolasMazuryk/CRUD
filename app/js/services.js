@@ -4,6 +4,35 @@
 
 angular.module( 'crudAppServices', [ 'ngResource'])
 
+    .factory( 'DataService', [ '$http', function ( $http ) {
+       var factory = {},
+           _host;
+console.log( window.location.host );
+
+        if ( window.location.host === 'localhost:4000') {
+            _host = 'http://localhost:4000';
+        } else if ( window.location.host === 'crud-it.herokuapp.com') {
+            _host = 'https://crud-it.herokuapp.com';
+        }
+
+        factory.getData = function ( _path, _method, _data, _headers ) {
+            if (_path && _method) {
+                if ( !_data ) {
+                    _data = {};
+                }
+                return $http({
+                    method: _method,
+                    url: _host + _path,
+                    data: _data,
+                    headers: _headers
+                });
+            }
+            return false;
+        };
+
+        return factory;
+    }])
+
     .service( 'PickImage', function() {
         var sizeSettings = {
             'thumbnail': 75,

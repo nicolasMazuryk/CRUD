@@ -4,7 +4,7 @@
 
 angular.module( 'crudAppDirectives', [])
 
-    .directive( 'savedItem',[ '$http', function ( $http ) {
+    .directive( 'savedItem',[ '$http', 'DataService', function ( $http, DataService ) {
         return {
             restrict: 'A',
             template:
@@ -132,8 +132,9 @@ angular.module( 'crudAppDirectives', [])
                             ctrl.results[ index].keywords[ current_hashtag ].value = scope.editableField;
                             break;
                     }
-
-                    $http.put( 'https://crud-it.herokuapp.com/saves', JSON.stringify( ctrl.results[index])).then( function ( res ) {
+                    DataService.getData('/saves', 'PUT', JSON.stringify( ctrl.results[index]))
+                    //$http.put( 'https://crud-it.herokuapp.com/saves', JSON.stringify( ctrl.results[index]))
+                        .then( function ( res ) {
                         ctrl.results = res.data.saves;
                     });
 

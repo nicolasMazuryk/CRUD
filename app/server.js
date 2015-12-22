@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 app.use(function ( req, res, next ) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+    res.header('Access-Control-Allow-Methods', 'GET', 'PUT', 'POST', 'DELETE');
     next();
 });
 
@@ -37,11 +38,6 @@ app.post('/', function ( req, res, next ) {
     var data = req.body;
 
     storage.saves[storage.storageLength] = data;
-
-
-    console.log( "Parsed data: ", data );
-    console.log( "Storage.saves: ", storage.saves );
-
     storage.storageLength += 1;
 
     fs.writeFile( 'database.json', JSON.stringify( storage ) );
@@ -79,6 +75,8 @@ app.delete('/saves', function ( req, res, next ) {
             break;
         }
     }
+    console.log( 'Removed : ', removed );
+    console.log( 'Index : ', i );
 
     fs.writeFile( 'database.json', JSON.stringify( storage ) );
     res.send('Removed!');
