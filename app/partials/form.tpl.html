@@ -32,11 +32,13 @@
     <div class="results-length" ng-show="news.resultLengthEnabled" >{{ (news.resultsLength > 20) ? 20 : news.resultsLength }} of about {{news.resultsLength}}</div>
 
     <div class="content">
-        <article ng-show="news.searchResultView" class="content__article" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">
+        <article ng-show="news.searchResultView" class="content__article" ng-repeat="searchItem in news.results">
+            <like-icon></like-icon>
 
-            <a href="{{searchItem.web_url}}" ng-if="news.pickImage(searchItem.multimedia, 'wide')">
-                <img src="{{news.pickImage(searchItem.multimedia, 'wide').url}}" width="{{news.pickImage(searchItem.multimedia, 'wide').width}}" height="{{news.pickImage(searchItem.multimedia, 'wide').height}}" alt=""/>
-            </a>
+            <img ng-if="news.pickImage(searchItem.multimedia, 'wide')"
+                 src="{{news.pickImage(searchItem.multimedia, 'wide').url}}"
+                 width="{{news.pickImage(searchItem.multimedia, 'wide').width}}"
+                 height="{{news.pickImage(searchItem.multimedia, 'wide').height}}" alt=""/>
 
             <h2 class="article__heading">{{searchItem.headline.main}}</h2>
 
@@ -45,13 +47,14 @@
             <p class="summary">{{searchItem.lead_paragraph}}</p>
 
             <span class="hashtag" ng-repeat="key in searchItem.keywords">#{{key.value}} </span>
-
+            <read-more></read-more>
         </article>
 
 
         <!-- Newswires rendering -->
 
-        <article ng-hide="news.searchResultView" class="content__article" ng-click="addToSaves(searchItem)" ng-repeat="searchItem in news.results">
+        <article ng-hide="news.searchResultView" class="content__article" ng-repeat="searchItem in news.results">
+            <like-icon></like-icon>
 
             <a class="thumb" href="{{searchItem.url}}">
                 <img src="{{news.pickImage(searchItem.multimedia, 'thumbnail').url}}" width="{{news.pickImage(searchItem.multimedia, 'thumbnail').width}}" height="{{news.pickImage(searchItem.multimedia, 'thumbnail').height}}" alt=""/>
@@ -62,7 +65,7 @@
             <p class="byline">{{searchItem.byline}}<span class="update-date"> {{news.parseDate(searchItem.updated_date)}}</span></p>
 
             <p class="summary">{{searchItem.abstract}}</p>
-
+            <read-more></read-more>
         </article>
 
 

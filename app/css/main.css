@@ -232,9 +232,33 @@ form {
   -webkit-transition: all 0.3s ease;
           transition: all 0.3s ease;
 }
-.content .content__article:hover {
-  opacity: 0.8;
-  z-index: 1;
+.content .content__article:hover like-icon {
+  display: block;
+  -webkit-transition: all 0.25s ease;
+          transition: all 0.25s ease;
+  cursor: pointer;
+}
+.content .content__article like-icon {
+  position: absolute;
+  display: none;
+  top: 6px;
+  right: 6px;
+  width: 40px;
+  height: 40px;
+  background: url(../img/icon-like.png) no-repeat center center;
+}
+.content .content__article like-icon:hover {
+  opacity: 0.75;
+  -webkit-transition: all 0.25s ease;
+          transition: all 0.25s ease;
+}
+.content .content__article read-more {
+  display: inline-block;
+  padding: 0 4px;
+  cursor: pointer;
+}
+.content .content__article read-more a {
+  font-size: 11pt;
 }
 .content .content__article .figcaption-text {
   margin: 0;
@@ -257,7 +281,7 @@ form {
   margin-bottom: 10px;
 }
 .content .content__article .byline {
-  display: inline-block;
+  display: block;
   font-size: 11px;
   line-height: 14px;
   color: #808080;
@@ -269,7 +293,7 @@ form {
   color: #333333;
   font-size: 13px;
   line-height: 18px;
-  margin: 8px 0;
+  margin: 3px 0;
   text-align: justify;
   font-family: georgia, "times new roman", times, serif;
   max-height: 106px;
@@ -298,6 +322,12 @@ footer {
 footer .developer {
   color: #FDF5E6;
   font-size: 1.1em;
+}
+.top {
+  position: fixed;
+  right: 100px;
+  bottom: 100px;
+  background: rgba(112, 122, 122, 0.6);
 }
 .items-amount {
   position: absolute;

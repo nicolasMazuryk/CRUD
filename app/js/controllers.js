@@ -20,7 +20,7 @@ angular.module('crudAppControllers', [])
 
                 vm.hasItems = vm.checkEmpty(data.saves);
 
-                vm.results = data.saves.reverse();
+                vm.results = data.saves;
                 $scope.storageLength = data.storageLength;
 
             })

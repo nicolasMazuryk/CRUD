@@ -199,8 +199,45 @@ h2, form {
     transition: all 0.3s ease;
 
     &:hover {
-      opacity: 0.8;
-      z-index: 1;
+
+      like-icon {
+        display: block;
+        transition: all 0.25s ease;
+        cursor: pointer;
+      }
+    }
+
+    .article__heading, .byline, .update-date, .summary, .hashtag {
+
+      //&:hover {
+      //  color: @text-input-edit;
+      //  transition: all 0.25s linear;
+      //}
+    }
+
+    like-icon {
+      position: absolute;
+      display: none;
+      top: 6px;
+      right: 6px;
+      width: 40px;
+      height: 40px;
+      background: url(../img/icon-like.png) no-repeat center center;
+
+      &:hover {
+        opacity: 0.75;
+        transition: all 0.25s ease;
+      }
+    }
+
+    read-more {
+      display: inline-block;
+      padding: 0 4px;
+      cursor: pointer;
+
+      a {
+        font-size: 11pt;
+      }
     }
 
     .figcaption-text {
@@ -227,7 +264,7 @@ h2, form {
     }
 
     .byline {
-      display: inline-block;
+      display: block;
       font-size: 11px;
       line-height: 14px;
       color: #808080;
@@ -240,7 +277,7 @@ h2, form {
       color: #333333;
       font-size: 13px;
       line-height: 18px;
-      margin: 8px 0;
+      margin: 3px 0;
       text-align: justify;
       font-family: georgia, "times new roman", times, serif;
 

@@ -4,6 +4,24 @@
 
 angular.module( 'crudAppDirectives', [])
 
+    .directive( 'likeIcon', function () {
+        return {
+            restrict: 'E',
+            link: function ( scope, elem, attrs ) {
+                elem.bind('click', function () {
+                    scope.addToSaves(scope.searchItem)
+                })
+            }
+        }
+    })
+
+    .directive( 'readMore', function () {
+        return {
+            restrict: "E",
+            template: "<a href='{{searchItem.web_url || searchItem.url}}' target='_blank'>Read more...</a>"
+        }
+    })
+
     .directive( 'savedItem',[ '$http', 'DataService', function ( $http, DataService ) {
         return {
             restrict: 'A',
@@ -123,7 +141,7 @@ angular.module( 'crudAppDirectives', [])
                             ctrl.results[ index].byline.original = scope.editableField;
                             break;
                         case 'pub_date':
-                            ctrl.results[ index].pub_date = scope.editableField;
+                            ctrl.results[ index].pub_date = ctrl.parseDate(scope.editableField) ;
                             break;
                         case 'summary':
                             ctrl.results[ index].lead_paragraph = scope.editableField;
