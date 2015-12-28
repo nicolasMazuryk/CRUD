@@ -2,8 +2,27 @@
 
 import welcome from './test';
 
-welcome('Nicolas Mazuryk');
+var module = welcome('Nicolas Mazuryk');
 
-    //debugger;
+module.setElem( module.header );
 
-module.exports.nick = welcome;
+//module.button.on('click', function () {
+//
+//    require.ensure(['./login'], function (require) { // or just require.ensure([], func)
+//        let login = require('./routes/login');
+//
+//        login();
+//    }, 'auth');
+//
+//    module.showElem(module.content);
+//
+//});
+
+//module.header.on('click', function () {
+//    require.ensure([], function (require) {
+//        let logout = require('./routes/logout');
+//
+//        logout();
+//    }, 'auth');
+//});
+
