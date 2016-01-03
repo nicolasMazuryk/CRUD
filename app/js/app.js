@@ -9,6 +9,7 @@ angular.module( 'crudApp', [
     'crudAppDirectives',
     //'crudAppFilters',
     'crudAppServices',
+    'ngMaterial',
     'ngRoute',
     'ngResource'
 ])

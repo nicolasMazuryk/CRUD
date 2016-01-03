@@ -228,6 +228,26 @@ angular.module('crudAppControllers', [])
 
     }])
 
+    .controller( 'BodyCtrl', ['$scope', '$timeout', '$mdSidenav', function ($scope, $timeout, $mdSidenav ) {
+        $scope.toggleSideNav = function ( navId ) {
+           $mdSidenav(navId)
+                .toggle()
+                .then( function () {
+                   console.log('SideNav Right is open!');
+               });
+        }
+    }])
+
+    .controller( 'SideNavCtrl', [ '$scope', '$timeout', '$mdSidenav', function ( $scope, $timeout, $mdSidenav ) {
+
+        $scope.close = function ( navId ) {
+            $mdSidenav( navId ).close()
+                .then( function () {
+                    console.log('Right $MdSidenav is closed!');
+                });
+        };
+    }])
+
     .controller('headerIssueCtrl', ['$scope', 'requestReview', 'reviewService', function ($scope, requestReview, reviewService) {
         $scope.data1 = requestReview.fetch(function (res) {
             $scope.results = res.results;

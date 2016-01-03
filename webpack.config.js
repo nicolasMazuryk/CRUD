@@ -7,16 +7,16 @@ var NODE_ENV = process.env.NODE_ENV || 'development',
 //module.exports = [ { }, { }, { } ]; // multi-compilation (for old browsers etc)
 
 module.exports = {
-    context: __dirname + '/app/component',
+    context: __dirname + '/app',
     entry: {
-        main: './main',
-        styles: './styles'
+        //main: './main',
+        styles: './less/main'
     },
         //home: './home',
         //about: './about',
         //common: ['./test', './common'] // the last module will be exported to global var
     output: {
-        path: __dirname + "/dist",
+        path: __dirname + "/app/css",
         publicPath: '/',    // internet path to static files (http://static.mysite.com/js/) "/" in the end - important
         filename: "[name].js"
         //library: '[name]'
