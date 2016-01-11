@@ -246,13 +246,5 @@ angular.module('crudAppControllers', [])
                     console.log('Right $MdSidenav is closed!');
                 });
         };
-    }])
-
-    .controller('headerIssueCtrl', ['$scope', 'requestReview', 'reviewService', function ($scope, requestReview, reviewService) {
-        $scope.data1 = requestReview.fetch(function (res) {
-            $scope.results = res.results;
-        });
-        $scope.data2 = reviewService.fetch;
-
-
     }]);
+
