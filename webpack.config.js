@@ -10,7 +10,7 @@ module.exports = {
     context: __dirname + '/app',
     entry: {
         //main: './main',
-        styles: './less/main'
+        styles: './less/index'
     },
         //home: './home',
         //about: './about',

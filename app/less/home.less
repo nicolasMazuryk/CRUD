@@ -1,131 +1,36 @@
-@import url(variables.less);
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);
-
-html {
-  height: 100%;
-}
-
-*[ng-cloak] {
-  display: none !important;
-}
-
-body {
-  position: relative;
-  background:  url('../img/bg.jpg');
-  background-repeat:  no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-  width: 100%;
-  min-height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  z-index: -2;
-
-  &:after {
-    position: absolute;
-    display: block;
-    content: '';
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    min-height: 100%;
-    background: rgba(255, 255, 255, .25);
-    z-index: -1;
-  }
-}
-
-.nav, .pagination, .carousel, .pannel-title a {
-  cursor: pointer;
-}
-
-.view {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}
-
-.loading-indicator {
-  position: absolute;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: black;
-  opacity: 0.25;
-}
-
-.three-dots-row-spinner {
-  position: absolute;
-  margin: 0;
-  top: 48%;
-  left: 48%;
-  background: #03A9F4;
-  z-index: 120;
-}
-
-h2, form {
-  margin: 20px auto;
-}
-
-.nyt {
-  display: block;
-  margin: 0 auto;
-  zoom: 0.35;
-}
-
-.grid-960 {
-  width: 960px;
-  margin: 0 auto;
-}
-
-.pagination-md {
-  margin: 15px auto;
-}
-
-.top-navbar {
-  width: 60%;
-  margin: 0 auto;
-
-  .nav a {
-    text-transform: uppercase;
-  }
-
-  .nav li + li {
-    margin: 5%;
-  }
-}
+@import './variables';
 
 .form__search {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  //width: 100%;
 
-  input[type=search] {
-    width: 79%;
+  .form__container {
+    width: 100%;
   }
 
-  .form__search_label {
-    padding: 10px 10px;
-    border-radius: 5px;
-    background: #ffffff;
-    width: 100%;
-    background: rgba(112,122,122, .5);
+  input[type=search] {
+    width: 87.5%;
+    height: 50px;
+    font-size: 20px;
   }
 
   .btn-search {
-    margin-left: 1%;
+    margin-left: 2%;
+    margin-right: 0;
     padding: 4px 15px;
-    border-radius: 5px;
-    width: 19%;
-    font-size: 13pt;
-    align-self: baseline;
+    width: 10%;
+  }
+
+  // change material css
+
+  md-input-container.md-has-icon {
+    padding-left: 0;
+  }
+  md-input-container.md-has-icon>label {
+    left: 0;
   }
 }
 

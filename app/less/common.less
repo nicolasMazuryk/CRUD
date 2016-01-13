@@ -1,0 +1,82 @@
+@import './variables';
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);
+
+
+html {
+  height: 100%;
+}
+
+*[ng-cloak] {
+  display: none !important;
+}
+
+body {
+  position: relative;
+  background-color: #edecec;
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  z-index: -2;
+
+  &:after {
+    position: absolute;
+    display: block;
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 100%;
+    background: rgba(255, 255, 255, .25);
+    z-index: -1;
+  }
+
+  * {
+    outline: none;
+  }
+}
+
+.view {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.nyt {
+  display: block;
+  margin: 0 auto;
+  zoom: 0.35;
+}
+
+.grid-960 {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.pagination-md {
+  margin: 15px auto;
+}
+
+.loading-indicator {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: black;
+  opacity: 0.25;
+}
+
+.three-dots-row-spinner {
+  position: absolute;
+  margin: 0;
+  top: 48%;
+  left: 48%;
+  background: #03A9F4;
+  z-index: 120;
+}

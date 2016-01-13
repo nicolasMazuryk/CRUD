@@ -1,9 +1,9 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
     fs = require('fs'),
-    database = require( './database.json'),
-    //path = require('path'),
-    port = process.env.PORT || 4000,
+    database = require('./database.json'),
+//path = require('path'),
+    port = process.env.PORT || 8080,
     host = process.env.HOST || '0.0.0.0',
     storage,
     app = express();
@@ -11,7 +11,7 @@ var express = require('express'),
 app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(function ( req, res, next ) {
+app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
     res.header('Access-Control-Allow-Methods', 'GET', 'PUT', 'POST', 'DELETE');
@@ -28,57 +28,57 @@ var DatabaseInit = function () {
 storage = new DatabaseInit();
 
 
-app.get('/', function (req, res, next ) {
+app.get('/', function (req, res, next) {
 
     res.sendfile(__dirname + '/index.html');
 
 });
 
-app.post('/', function ( req, res, next ) {
+app.post('/', function (req, res, next) {
     var data = req.body;
 
     storage.saves[storage.storageLength] = data;
     storage.storageLength += 1;
 
-    fs.writeFile( 'database.json', JSON.stringify( storage ) );
+    fs.writeFile('database.json', JSON.stringify(storage));
 
-    res.send( JSON.stringify( storage ));
+    res.send(JSON.stringify(storage));
 });
 
-app.get('/saves', function ( req, res, next ) {
+app.get('/saves', function (req, res, next) {
 
-    res.send( JSON.stringify( storage ));
+    res.send(JSON.stringify(storage));
 
 });
 
-app.put('/saves', function ( req, res, next ) {
+app.put('/saves', function (req, res, next) {
     var edited = req.body;
 //
-    for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
-        if (storage.saves[i]._id === edited._id ) {
-            storage.saves[ i ] = edited;
+    for (var i = 0, l = storage.storageLength; i < l; i += 1) {
+        if (storage.saves[i]._id === edited._id) {
+            storage.saves[i] = edited;
             break;
         }
     }
-    fs.writeFile( 'database.json', JSON.stringify( storage ) );
+    fs.writeFile('database.json', JSON.stringify(storage));
 
-    res.send( JSON.stringify(storage));
+    res.send(JSON.stringify(storage));
 });
 
-app.delete('/saves', function ( req, res, next ) {
+app.delete('/saves', function (req, res, next) {
     var removed = req.body;
 
-    for (var i = 0, l = storage.storageLength; i < l; i += 1 ) {
-        if (storage.saves[i]._id === removed._id ) {
-            storage.saves.splice( i, 1 );
+    for (var i = 0, l = storage.storageLength; i < l; i += 1) {
+        if (storage.saves[i]._id === removed._id) {
+            storage.saves.splice(i, 1);
             storage.storageLength -= 1;
             break;
         }
     }
-    console.log( 'Removed : ', removed );
-    console.log( 'Index : ', i );
+    console.log('Removed : ', removed);
+    console.log('Index : ', i);
 
-    fs.writeFile( 'database.json', JSON.stringify( storage ) );
+    fs.writeFile('database.json', JSON.stringify(storage));
     res.send('Removed!');
 });
 

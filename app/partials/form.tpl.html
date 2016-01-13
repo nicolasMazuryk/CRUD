@@ -1,30 +1,40 @@
 <div class="view">
 
-    <form class="form form-inline grid-960">
-        <div class="form__search">
-            <label class="form__search_label">
-                <input autofocus type="search" class="form-control" ng-model="news.formSearch" placeholder="Find Article"/>
+    <form class="form__search card grid-960">
+        <md-input-container class="form__container">
+            <label for="form__search_label">Write something...</label>
+            <input type="search" ng-model="news.formSearch" id="form__search_label" autofocus>
 
-                <button ng-click="news.getSearchResult()" type="submit" class="btn-search btn btn-primary">
-                    Search Article
-                </button>
-            </label>
+            <md-button ng-click="news.getSearchResult()" class="md-raised btn-search" aria-label="Search">
+                <md-icon md-svg-icon="img/svg-search.svg"></md-icon>
+            </md-button>
+        </md-input-container>
 
+    </form>
 
+    <form class="grid-960 card">
+        <!--<div class="form__search">-->
+            <!--<label class="form__search_label">-->
+                <!--<input autofocus type="search" class="form-control" ng-model="news.formSearch" placeholder="Find Article"/>-->
 
-        </div>
+                <!--<button ng-click="news.getSearchResult()" type="submit" class="btn-search btn btn-primary">-->
+                    <!--Search Article-->
+                <!--</button>-->
+            <!--</label>-->
+
+        <!--</div>-->
 
         <div ng-click="news.getLastNews()" class="btn_load btn btn-success">Pick & Load</div>
 
         <div class="form__sections">
-            <div class="form__checkbox">
+            <md-button class="form__checkbox md-raised">
                 <input checkbox-group id="default" type="checkbox" value="all"/>
                 <label for="default">All</label>
-            </div>
-            <div ng-repeat="catagory in news.catagories" class="form__checkbox" >
+            </md-button>
+            <md-button ng-repeat="catagory in news.catagories" class="form__checkbox md-raised">
                 <input checkbox-group id="{{catagory.section}}" type="checkbox" value="{{catagory.section}}"/>
                 <label for="{{catagory.section}}">{{catagory.display_name}}</label>
-            </div>
+            </md-button>
         </div>
 
     </form>
@@ -32,7 +42,7 @@
     <div class="results-length" ng-show="news.resultLengthEnabled" >{{ (news.resultsLength > 20) ? 20 : news.resultsLength }} of about {{news.resultsLength}}</div>
 
     <div class="content">
-        <article ng-show="news.searchResultView" class="content__article" ng-repeat="searchItem in news.results">
+        <article ng-show="news.searchResultView" class="content__article card" ng-repeat="searchItem in news.results">
             <like-icon></like-icon>
 
             <img ng-if="news.pickImage(searchItem.multimedia, 'wide')"
@@ -53,7 +63,7 @@
 
         <!-- Newswires rendering -->
 
-        <article ng-hide="news.searchResultView" class="content__article" ng-repeat="searchItem in news.results">
+        <article ng-hide="news.searchResultView" class="content__article card" ng-repeat="searchItem in news.results">
             <like-icon></like-icon>
 
             <a class="thumb" href="{{searchItem.url}}">
