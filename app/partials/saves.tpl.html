@@ -1,10 +1,16 @@
 <div class="view likes__">
-    <div class="items-amount">{{storageLength}}</div>
+    <div class="panel">{{storageLength}}</div>
 
-    <button type="button" class="btn btn-default" ng-click="open()">Create article</button>
 
     <div ng-if="storageLength" class="content">
-        <article saved-item class="content__article" ng-repeat="searchItem in saves.results track by $index">
+        <article class="waves-effect content__article card waves-light" ng-click="open()">
+            <div class="card-title">Create New Article</div>
+            <div class="card-content">
+                <button class="btn-floating waves-effect waves-light large"><i class="material-icons">add</i></button>
+            </div>
+        </article>
+
+        <article saved-item class="content__article card waves-light" ng-repeat="searchItem in saves.results track by $index">
         </article>
     </div>
 

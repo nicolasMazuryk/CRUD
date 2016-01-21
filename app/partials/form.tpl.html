@@ -12,6 +12,7 @@
 
     </form>
 
+
     <form class="grid-960 card">
         <!--<div class="form__search">-->
             <!--<label class="form__search_label">-->
@@ -42,23 +43,52 @@
     <div class="results-length" ng-show="news.resultLengthEnabled" >{{ (news.resultsLength > 20) ? 20 : news.resultsLength }} of about {{news.resultsLength}}</div>
 
     <div class="content">
-        <article ng-show="news.searchResultView" class="content__article card" ng-repeat="searchItem in news.results">
-            <like-icon></like-icon>
 
-            <img ng-if="news.pickImage(searchItem.multimedia, 'wide')"
-                 src="{{news.pickImage(searchItem.multimedia, 'wide').url}}"
-                 width="{{news.pickImage(searchItem.multimedia, 'wide').width}}"
-                 height="{{news.pickImage(searchItem.multimedia, 'wide').height}}" alt=""/>
 
-            <h2 class="article__heading">{{searchItem.headline.main}}</h2>
+        <article ng-show="news.searchResultView" class="content__article card waves-light" ng-repeat="searchItem in news.results">
 
-            <p class="byline">{{searchItem.byline.original}}<span class="update-date"> {{news.parseDate(searchItem.pub_date)}}</span></p>
+            <div ng-if="news.pickImage(searchItem.multimedia, 'wide')" class="card-image">
+                <img src="{{news.pickImage(searchItem.multimedia, 'wide').url}}" alt=""/>
 
-            <p class="summary">{{searchItem.lead_paragraph}}</p>
+                <div class="card-title">{{searchItem.headline.main}}</div>
+            </div>
 
-            <span class="hashtag" ng-repeat="key in searchItem.keywords">#{{key.value}} </span>
-            <read-more></read-more>
+            <div ng-if="!news.pickImage(searchItem.multimedia, 'wide')" class="card-title">{{searchItem.headline.main}}</div>
+
+            <div class="card-content">
+                <p class="byline">{{searchItem.byline.original}}
+                    <span class="update-date">{{news.parseDate(searchItem.pub_date)}}</span>
+                </p>
+
+                <p>{{searchItem.lead_paragraph}}</p>
+
+                <span class="chip truncate" ng-repeat="key in searchItem.keywords">{{key.value}}<i class="material-icons">close</i></span>
+            </div>
+
+            <div class="card-action">
+                <read-more></read-more>
+                <like-icon></like-icon>
+            </div>
         </article>
+
+
+        <!--<article ng-show="news.searchResultView" class="content__article card" ng-repeat="searchItem in news.results">-->
+            <!--<like-icon></like-icon>-->
+
+            <!--<img ng-if="news.pickImage(searchItem.multimedia, 'wide')"-->
+                 <!--src="{{news.pickImage(searchItem.multimedia, 'wide').url}}"-->
+                 <!--width="{{news.pickImage(searchItem.multimedia, 'wide').width}}"-->
+                 <!--height="{{news.pickImage(searchItem.multimedia, 'wide').height}}" alt=""/>-->
+
+            <!--<h2 class="article__heading">{{searchItem.headline.main}}</h2>-->
+
+            <!--<p class="byline">{{searchItem.byline.original}}<span class="update-date"> {{news.parseDate(searchItem.pub_date)}}</span></p>-->
+
+            <!--<p class="summary">{{searchItem.lead_paragraph}}</p>-->
+
+            <!--<span class="hashtag" ng-repeat="key in searchItem.keywords">#{{key.value}} </span>-->
+            <!--<read-more></read-more>-->
+        <!--</article>-->
 
 
         <!-- Newswires rendering -->

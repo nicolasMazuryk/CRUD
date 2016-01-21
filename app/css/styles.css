@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700);html {
+html {
   height: 100%;
 }
 *[ng-cloak] {
@@ -86,9 +86,78 @@ body * {
   background: #03A9F4;
   z-index: 120;
 }
-.card {
+article.card .highlight {
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+article.card .highlight:hover {
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 1px rgba(38, 166, 154, 0.8);
+}
+article.card .card-title {
+  padding: 20px;
+  width: 100%;
+  font-size: 22px;
+  line-height: 1.3;
+  background: rgba(0, 0, 0, 0.05);
+  max-height: 108px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+article.card .card-image .card-title {
+  background: rgba(0, 0, 0, 0.5);
+}
+article.card .card-content {
+  padding-bottom: 8px;
+}
+article.card .card-content p {
+  margin: 5px 0;
+  max-height: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+article.card .card-content .chip {
+  margin: 2px 2px 2px 0;
+  height: 22px;
+  line-height: 22px;
+  font-size: 11px;
+}
+article.card .card-content .chip i.material-icons {
+  font-size: inherit;
+  line-height: inherit;
+}
+article.card .input-field {
+  position: relative;
+}
+article.card .input-field .icon-group {
+  position: absolute;
+  right: 0;
+  bottom: 16px;
+  font-size: 28px;
   background: #ffffff;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+}
+article.card .input-field label {
+  left: 0;
+}
+article.card .card-action {
+  position: relative;
+  padding: 15px 20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .form__search {
   display: -webkit-box;
@@ -205,15 +274,12 @@ body * {
   margin: 0 auto;
 }
 .content .content__article {
-  margin: 12px 0;
-  padding: 8px;
   -webkit-flex-basis: 32%;
       -ms-flex-preferred-size: 32%;
           flex-basis: 32%;
   height: 100%;
   position: relative;
   background: #fff;
-  font: 400 12pt "Ubuntu";
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
@@ -223,27 +289,14 @@ body * {
   transition: all 0.25s ease;
   cursor: pointer;
 }
-.content .content__article like-icon {
-  position: absolute;
-  display: none;
-  top: 6px;
-  right: 6px;
-  width: 40px;
-  height: 40px;
-  background: url(/img/icon-like.png) no-repeat center center;
+.content .content__article like-icon i {
+  color: #ffffff;
 }
-.content .content__article like-icon:hover {
-  opacity: 0.75;
-  -webkit-transition: all 0.25s ease;
-  transition: all 0.25s ease;
-}
-.content .content__article read-more {
-  display: inline-block;
-  padding: 0 4px;
-  cursor: pointer;
+.content .content__article like-icon .marked i {
+  color: yellow;
 }
 .content .content__article read-more a {
-  font-size: 11pt;
+  font-size: 10pt;
 }
 .content .content__article .figcaption-text {
   margin: 0;
@@ -288,7 +341,6 @@ body * {
 }
 .content .content__article .update-date {
   display: block;
-  margin-left: 3px;
   color: #a81817;
   font-size: 11px;
   line-height: 12px;

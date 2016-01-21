@@ -1,0 +1,91 @@
+<div>
+    <!--// href={{searchItem.web_url}}-->
+
+    <div ng-if="saves.pickImage(searchItem.multimedia, 'wide')"
+         ng-click="enableEditor( $index, 'image', $event )"
+         ng-hide="editorEnabled.image"
+         class="card-image highlight">
+        <img src="{{saves.pickImage(searchItem.multimedia, 'wide').url}}" alt=""/>
+
+        <div class="card-title highlight"
+             ng-click="enableEditor( $index, 'title', $event )"
+             ng-hide="editorEnabled.title">{{searchItem.headline.main}}</div>
+    </div>
+
+    <div class="input-field" ng-show="editorEnabled.image">
+        <input id="image" type="text" ng-model="editImgUrl"/>
+        <label class="active" for="image">Edit Image URL</label>
+        <div class="icon-group">
+            <i class="material-icons green-text text-darken-1" ng-click="save( $index, 'image' )">check</i>
+            <i class="material-icons red-text text-darken-1" ng-click="disableEditor( 'image' )">close</i>
+        </div>
+    </div>
+
+    <div ng-if="!saves.pickImage(searchItem.multimedia, 'wide')"
+         ng-click="enableEditor( $index, 'title', $event )"
+         ng-hide="editorEnabled.title"
+         class="card-title highlight">{{searchItem.headline.main}}</div>
+
+    <div class="input-field" ng-show="editorEnabled.title">
+        <input id="title" type="text" ng-model="editableField"/>
+        <label class="active" for="title">Edit Title</label>
+        <div class="icon-group">
+            <i class="material-icons green-text text-darken-1" ng-click="save( $index, 'title' )">check</i>
+            <i class="material-icons red-text text-darken-1" ng-click="disableEditor( 'title' )">close</i>
+        </div>
+    </div>
+
+    <div class="card-content">
+        <p class="byline highlight" ng-click="enableEditor( $index, 'byline', $event )" ng-hide="editorEnabled.byline">
+            {{searchItem.byline.original}}</p>
+
+        <div class='input-field' ng-show="editorEnabled.byline">
+            <input id="author" type="text" ng-model="editableField"/>
+            <label class="active" for="author">Edit Author</label>
+            <div class="icon-group">
+                <i class="material-icons green-text text-darken-1" ng-click="save( $index, 'byline' )">check</i>
+                <i class="material-icons red-text text-darken-1" ng-click="disableEditor( 'byline' )">close</i>
+            </div>
+        </div>
+
+        <span class="update-date highlight" ng-click="enableEditor( $index, 'pub_date', $event )" ng-hide="editorEnabled.pub_date">{{saves.parseDate(searchItem.pub_date)}}</span>
+
+        <div class="input-field" ng-show="editorEnabled.pub_date">
+            <input id="pub_date" type="text" ng-model="editableField"/>
+            <label class="active" for="pub_date">Edit Publish Date</label>
+            <div class="icon-group">
+                <i class="material-icons green-text text-darken-1" ng-click="save( $index, 'pub_date' )">check</i>
+                <i class="material-icons red-text text-darken-1" ng-click="disableEditor( 'pub_date' )">close</i>
+            </div>
+        </div>
+
+        <p class="highlight" ng-click="enableEditor( $index, 'summary', $event )" ng-hide="editorEnabled.summary">
+            {{searchItem.lead_paragraph}}</p>
+
+        <div class="input-field" ng-show="editorEnabled.summary">
+            <textarea id="textarea" class="materialize-textarea" ng-model="editableField"></textarea>
+            <label class="active" for="textarea">Edit Summary</label>
+            <div class="icon-group">
+                <i class="material-icons green-text text-darken-1" ng-click="save( $index, 'summary' )">check</i>
+                <i class="material-icons red-text text-darken-1" ng-click="disableEditor( 'summary' )">close</i>
+            </div>
+        </div>
+
+        <span class="chip truncate highlight" ng-click="enableEditor( $parent.$index, 'hashtag', $event, key )"
+          ng-hide="editorEnabled.hashtag" ng-repeat="(key, val) in searchItem.keywords">{{val.value}}</span>
+
+        <div class="input-field" ng-show="editorEnabled.hashtag">
+            <input id="hashtag" type="text" ng-model="editableField"/>
+            <label class="active" for="hashtag">Edit Hashtag</label>
+            <div class="icon-group">
+                <i class="material-icons green-text text-darken-1" ng-click="save( $index, 'hashtag' )">check</i>
+                <i class="material-icons red-text text-darken-1" ng-click="disableEditor( 'hashtag' )">close</i>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-action">
+        <read-more></read-more>
+        <button class="btn waves-effect waves-light" ng-click="saves.removeFromSaved($index)">Remove<i class='material-icons right'>cancel</i></button>
+    </div>
+</div>

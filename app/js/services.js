@@ -9,8 +9,8 @@ angular.module( 'crudAppServices', [ 'ngResource'])
            _host;
 console.log( window.location.host );
 
-        if ( window.location.host === 'localhost:8080') {
-            _host = 'http://localhost:8080';
+        if ( window.location.host === 'localhost:4000') {
+            _host = 'http://localhost:4000';
         } else if ( window.location.host === 'crud-it.herokuapp.com') {
             _host = 'https://crud-it.herokuapp.com';
         }

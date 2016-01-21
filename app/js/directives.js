@@ -7,76 +7,31 @@ angular.module( 'crudAppDirectives', [])
     .directive( 'likeIcon', function () {
         return {
             restrict: 'E',
+            template: "<a class='btn-floating waves-effect waves-light'><i class='material-icons'>grade</i></a>",
             link: function ( scope, elem, attrs ) {
                 elem.bind('click', function () {
-                    scope.addToSaves(scope.searchItem)
+                    scope.addToSaves(scope.searchItem);
+                    elem.find('a').toggleClass('marked');
                 })
             }
         }
     })
 
+    // grade, favourite
+
     .directive( 'readMore', function () {
         return {
             restrict: "E",
-            template: "<a href='{{searchItem.web_url || searchItem.url}}' target='_blank'>Read more...</a>"
+            template: "<a class='waves-effect waves-light btn' href='{{searchItem.web_url || searchItem.url}}' target='_blank'>" +
+            "<i class='material-icons md-dark right'>launch</i>" +
+            "Read more</a>"
         }
     })
 
     .directive( 'savedItem',[ '$http', 'DataService', function ( $http, DataService ) {
         return {
             restrict: 'A',
-            template:
-                // href={{searchItem.web_url}}
-            '<a href="" ng-click="enableEditor( $index, \'image\', $event )" ng-hide="editorEnabled.image" ng-if="saves.pickImage(searchItem.multimedia, \'wide\')">' +
-                '<img src="{{saves.pickImage(searchItem.multimedia, \'wide\').url}}" width="{{saves.pickImage(searchItem.multimedia, \'wide\').width}}" height="{{saves.pickImage(searchItem.multimedia, \'wide\').height}}" alt=""/>' +
-            '</a>' +
-            '<div ng-show="editorEnabled.image">' +
-                '<input type="text" ng-model="editSource" />' +
-                '<input type="text" ng-model="editImgUrl" />' +
-                '<input type="text" ng-model="editWidth" />' +
-                '<input type="text" ng-model="editHeight" />' +
-                '<button ng-click="save($index, \'image\')">Save</button>' +
-                '<button ng-click="disableEditor( \'image\' )">Cancel</button>' +
-            '</div>' +
-
-            '<h2 class="article__heading" ng-click="enableEditor( $index, \'title\', $event )" ng-hide="editorEnabled.title">{{searchItem.headline.main}}</h2>' +
-            '<div ng-show="editorEnabled.title">' +
-                '<input type="text" ng-model="editableField" />' +
-                '<button ng-click="save($index, \'title\')">Save</button>' +
-                '<button ng-click="disableEditor( \'title\' )">Cancel</button>' +
-            '</div>' +
-
-            '<p class="byline" ng-click="enableEditor( $index, \'byline\', $event )" ng-hide="editorEnabled.byline">{{searchItem.byline.original}}</p>' +
-            '<span class="update-date" ng-click="enableEditor( $index, \'pub_date\', $event )" ng-hide="editorEnabled.pub_date"> {{saves.parseDate(searchItem.pub_date)}}</span>' +
-
-            '<div ng-show="editorEnabled.byline">' +
-                '<input type="text" ng-model="editableField" />' +
-                '<button ng-click="save($index, \'byline\')">Save</button>' +
-                '<button ng-click="disableEditor( \'byline\' )">Cancel</button>' +
-            '</div>' +
-
-            '<div ng-show="editorEnabled.pub_date">' +
-                '<input type="text" ng-model="editableField" />' +
-                '<button ng-click="save($index, \'pub_date\')">Save</button>' +
-                '<button ng-click="disableEditor( \'pub_date\' )">Cancel</button>' +
-            '</div>' +
-
-            '<p class="summary" ng-click="enableEditor( $index, \'summary\', $event )" ng-hide="editorEnabled.summary">{{searchItem.lead_paragraph}}</p>' +
-
-            '<div ng-show="editorEnabled.summary">' +
-                '<textarea ng-model="editableField"></textarea>' +
-                '<button ng-click="save($index, \'summary\')">Save</button>' +
-                '<button ng-click="disableEditor( \'summary\' )">Cancel</button>' +
-            '</div>' +
-
-            '<span class="hashtag" ng-click="enableEditor( $parent.$index, \'hashtag\', $event, key )" ng-hide="editorEnabled.hashtag" ng-repeat="(key, val) in searchItem.keywords">#{{val.value}} </span>' +
-
-            '<div ng-show="editorEnabled.hashtag">' +
-                '<input type="text" ng-model="editableField" />' +
-                '<button ng-click="save( $index, \'hashtag\' )">Save</button>' +
-                '<button ng-click="disableEditor( \'hashtag\' )">Cancel</button>' +
-            '</div>' +
-            '<button class="btn btn-default" ng-click="saves.removeFromSaved($index)">Remove</button>',
+            templateUrl: 'partials/card-editable.tpl.html',
 
             controller: 'savesTplCtrl',
             link: function ( scope, elem, attrs, ctrl ) {
@@ -92,6 +47,7 @@ angular.module( 'crudAppDirectives', [])
                 };
 
                 scope.enableEditor = function ( index, item, $event, hashtag_idx ) {
+                    $event.stopPropagation();
 
                     scope.editorEnabled[ item ] = true;
                     current_hashtag = hashtag_idx;
@@ -99,10 +55,8 @@ angular.module( 'crudAppDirectives', [])
 
                     switch ( item ) {
                     case 'image':
-                        scope.editSource = ctrl.results[ index].web_url;
+                        //scope.editSource = ctrl.results[ index].web_url;
                         scope.editImgUrl = ctrl.results[ index].multimedia[0].url;
-                        scope.editWidth = ctrl.results[ index].multimedia[0].width;
-                        scope.editHeight = ctrl.results[ index].multimedia[0].height;
                         break;
                     case 'title':
                         scope.editableField = ctrl.results[ index].headline.main;

@@ -3,7 +3,7 @@ var express = require('express'),
     fs = require('fs'),
     database = require('./database.json'),
 //path = require('path'),
-    port = process.env.PORT || 8080,
+    port = process.env.PORT || 4000,
     host = process.env.HOST || '0.0.0.0',
     storage,
     app = express();

@@ -96,15 +96,15 @@
   margin: 0 auto;
 
   .content__article {
-    margin: 12px 0;
-    padding: 8px;
+    //margin: 12px 0;
+    //padding: 8px;
     flex-basis: 32%;
     height: 100%;
       //max-height: 250px;
       //overflow: hidden;
     position: relative;
     background: #fff;
-    font: 400 12pt "Ubuntu";
+    //font: 400 12pt "Ubuntu";
     transition: all 0.3s ease;
 
     &:hover {
@@ -125,27 +125,29 @@
     }
 
     like-icon {
-      position: absolute;
-      display: none;
-      top: 6px;
-      right: 6px;
-      width: 40px;
-      height: 40px;
-      background: url(../img/icon-like.png) no-repeat center center;
 
-      &:hover {
-        opacity: 0.75;
-        transition: all 0.25s ease;
+      i {
+        color: #ffffff;
+        //line-height: 37px;
+        //width: 100%;
+        //text-align: center;
+      }
+
+      .marked i {
+        color: yellow;
       }
     }
 
+
+
+
     read-more {
-      display: inline-block;
-      padding: 0 4px;
-      cursor: pointer;
+      //display: inline-block;
+      //padding: 0 4px;
+      //cursor: pointer;
 
       a {
-        font-size: 11pt;
+        font-size: 10pt;
       }
     }
 
@@ -198,7 +200,6 @@
 
     .update-date {
       display: block;
-      margin-left: 3px;
       color: #a81817;
       font-size: 11px;
       line-height: 12px;

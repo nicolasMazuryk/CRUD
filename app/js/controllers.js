@@ -75,6 +75,7 @@ angular.module('crudAppControllers', [])
                 console.log('Modal window throws an error: ' + e);
             });
         };
+
     }])
 
     .controller('newsRequestCtrl', ['$scope', '$http', 'Categories', 'ParseDate', 'PickImage', 'DataService',  function ($scope, $http, Categories, ParseDate, PickImage, DataService) {
@@ -225,6 +226,8 @@ angular.module('crudAppControllers', [])
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
+
+
 
     }])
 
