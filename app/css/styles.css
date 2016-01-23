@@ -86,6 +86,12 @@ body * {
   background: #03A9F4;
   z-index: 120;
 }
+.nav-wrapper .brand-logo {
+  margin-left: 15px;
+}
+.nav-wrapper .brand-logo .logo {
+  zoom: 0.15;
+}
 article.card .highlight {
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
@@ -127,6 +133,21 @@ article.card .card-content .chip i.material-icons {
   font-size: inherit;
   line-height: inherit;
 }
+article.card .card-content.new_item {
+  min-height: 160px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 article.card .input-field {
   position: relative;
 }
@@ -159,6 +180,39 @@ article.card .card-action {
       -ms-flex-align: center;
           align-items: center;
 }
+article.card.newswire {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 48%;
+      -ms-flex: 0 0 48%;
+          flex: 0 0 48%;
+}
+article.card.newswire .newswire__header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 20px;
+}
+article.card.newswire .newswire__header img {
+  margin-right: 5%;
+  border-radius: 50%;
+}
+article.card.newswire .newswire__header .card-title {
+  padding: 0;
+  background: none;
+}
 .form__search {
   display: -webkit-box;
   display: -webkit-flex;
@@ -175,20 +229,24 @@ article.card .card-action {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 15px;
+  margin-top: 20px;
 }
-.form__search .form__container {
+.form__search .input-field {
   width: 100%;
 }
-.form__search input[type=search] {
-  width: 87.5%;
-  height: 50px;
+.form__search input[type=text] {
+  width: 86.5%;
   font-size: 20px;
+  text-indent: 12px;
 }
 .form__search .btn-search {
   margin-left: 2%;
   margin-right: 0;
-  padding: 4px 15px;
-  width: 10%;
+  width: 11%;
+}
+.form__search .btn-search i {
+  font-size: 36px;
 }
 .form__search md-input-container.md-has-icon {
   padding-left: 0;
@@ -200,7 +258,10 @@ article.card .card-action {
   display: block;
   width: 100%;
   margin: 30px auto 15px;
-  font-size: 16pt;
+  line-height: 36px;
+}
+.btn_load i {
+  font-size: 2.1rem;
 }
 .form__sections {
   display: -webkit-box;
@@ -214,6 +275,7 @@ article.card .card-action {
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  padding: 15px;
 }
 .form__sections .form__checkbox {
   display: inline-block;
@@ -222,27 +284,35 @@ article.card .card-action {
   display: none;
 }
 .form__sections .form__checkbox input:checked + label {
-  background: #03A9F4;
+  color: #ffffff;
+  background: #00796b;
 }
 .form__sections .form__checkbox label {
   display: inline-block;
-  margin: 3px 4px;
-  padding: 4px 12px;
-  border: 1px solid #03A9F4;
+  margin: 3px 2px;
   background: #ffffff;
-  border-radius: 4px;
   font-size: 13px;
+  color: rgba(0, 0, 0, 0.8);
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+.form__sections .form__checkbox label:before {
+  display: none;
+}
 .form__sections .form__checkbox label:hover {
-  background: #03A9F4;
+  color: #ffffff;
+  background: #26a69a;
+}
+.categories {
+  margin-top: 20px;
 }
 .results-length {
   width: 960px;
   margin: 12px auto;
+  padding: 12px 16px;
   text-align: right;
-  font: 600 13pt "Ubuntu";
+  font-weight: 300;
+  font-size: 15px;
   color: #696969;
 }
 .content {
@@ -282,12 +352,6 @@ article.card .card-action {
   background: #fff;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-}
-.content .content__article:hover like-icon {
-  display: block;
-  -webkit-transition: all 0.25s ease;
-  transition: all 0.25s ease;
-  cursor: pointer;
 }
 .content .content__article like-icon i {
   color: #ffffff;
@@ -357,7 +421,7 @@ footer {
   font: 400 9pt "Ubuntu";
 }
 footer .developer {
-  color: #FDF5E6;
+  color: #00796b;
   font-size: 1.1em;
 }
 .top {

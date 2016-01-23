@@ -1,49 +1,22 @@
 <div class="view">
 
     <form class="form__search card grid-960">
-        <md-input-container class="form__container">
-            <label for="form__search_label">Write something...</label>
-            <input type="search" ng-model="news.formSearch" id="form__search_label" autofocus>
+        <div class="input-field col s10 m10 l10">
+            <input ng-model="news.formSearch" id="search_api" class="validate" type="text" lenght="20" autofocus/>
+            <label for="search_api">Write something...</label>
 
-            <md-button ng-click="news.getSearchResult()" class="md-raised btn-search" aria-label="Search">
-                <md-icon md-svg-icon="img/svg-search.svg"></md-icon>
-            </md-button>
-        </md-input-container>
-
-    </form>
-
-
-    <form class="grid-960 card">
-        <!--<div class="form__search">-->
-            <!--<label class="form__search_label">-->
-                <!--<input autofocus type="search" class="form-control" ng-model="news.formSearch" placeholder="Find Article"/>-->
-
-                <!--<button ng-click="news.getSearchResult()" type="submit" class="btn-search btn btn-primary">-->
-                    <!--Search Article-->
-                <!--</button>-->
-            <!--</label>-->
-
-        <!--</div>-->
-
-        <div ng-click="news.getLastNews()" class="btn_load btn btn-success">Pick & Load</div>
-
-        <div class="form__sections">
-            <md-button class="form__checkbox md-raised">
-                <input checkbox-group id="default" type="checkbox" value="all"/>
-                <label for="default">All</label>
-            </md-button>
-            <md-button ng-repeat="catagory in news.catagories" class="form__checkbox md-raised">
-                <input checkbox-group id="{{catagory.section}}" type="checkbox" value="{{catagory.section}}"/>
-                <label for="{{catagory.section}}">{{catagory.display_name}}</label>
-            </md-button>
+            <button ng-click="news.getSearchResult()" type="submit" class="btn-search btn btn-large wave-effect wave-light"><i class="material-icons">search</i></button>
         </div>
-
     </form>
 
-    <div class="results-length" ng-show="news.resultLengthEnabled" >{{ (news.resultsLength > 20) ? 20 : news.resultsLength }} of about {{news.resultsLength}}</div>
+
+
+
+    <div class="results-length card" ng-show="news.resultLengthEnabled" >{{ (news.resultsLength > 20) ? 20 : news.resultsLength }} of about {{news.resultsLength}} results</div>
 
     <div class="content">
 
+        <!-- Search API results-->
 
         <article ng-show="news.searchResultView" class="content__article card waves-light" ng-repeat="searchItem in news.results">
 
@@ -71,42 +44,25 @@
             </div>
         </article>
 
+        <!-- Newswires API results -->
 
-        <!--<article ng-show="news.searchResultView" class="content__article card" ng-repeat="searchItem in news.results">-->
-            <!--<like-icon></like-icon>-->
+        <!--<article ng-hide="news.searchResultView" class="content__article newswire card waves-light" ng-repeat="searchItem in news.results">-->
+            <!--<div class="newswire__header">-->
+                <!--<img class="z-depth-2" src="{{news.pickImage(searchItem.multimedia, 'thumbnail').url}}" alt=""/>-->
 
-            <!--<img ng-if="news.pickImage(searchItem.multimedia, 'wide')"-->
-                 <!--src="{{news.pickImage(searchItem.multimedia, 'wide').url}}"-->
-                 <!--width="{{news.pickImage(searchItem.multimedia, 'wide').width}}"-->
-                 <!--height="{{news.pickImage(searchItem.multimedia, 'wide').height}}" alt=""/>-->
+                <!--<div class="card-title">{{searchItem.title}}</div>-->
+            <!--</div>-->
+            <!--<div class="card-content">-->
+                <!--<p class="byline">{{searchItem.byline}}<span class="update-date"> {{news.parseDate(searchItem.updated_date)}}</span></p>-->
 
-            <!--<h2 class="article__heading">{{searchItem.headline.main}}</h2>-->
+                <!--<p class="summary">{{searchItem.abstract}}</p>-->
+            <!--</div>-->
+            <!--<div class="card-action">-->
+                <!--<read-more></read-more>-->
+                <!--<like-icon></like-icon>-->
+            <!--</div>-->
 
-            <!--<p class="byline">{{searchItem.byline.original}}<span class="update-date"> {{news.parseDate(searchItem.pub_date)}}</span></p>-->
-
-            <!--<p class="summary">{{searchItem.lead_paragraph}}</p>-->
-
-            <!--<span class="hashtag" ng-repeat="key in searchItem.keywords">#{{key.value}} </span>-->
-            <!--<read-more></read-more>-->
         <!--</article>-->
-
-
-        <!-- Newswires rendering -->
-
-        <article ng-hide="news.searchResultView" class="content__article card" ng-repeat="searchItem in news.results">
-            <like-icon></like-icon>
-
-            <a class="thumb" href="{{searchItem.url}}">
-                <img src="{{news.pickImage(searchItem.multimedia, 'thumbnail').url}}" width="{{news.pickImage(searchItem.multimedia, 'thumbnail').width}}" height="{{news.pickImage(searchItem.multimedia, 'thumbnail').height}}" alt=""/>
-            </a>
-
-            <h2 class="article__heading">{{searchItem.title}}</h2>
-
-            <p class="byline">{{searchItem.byline}}<span class="update-date"> {{news.parseDate(searchItem.updated_date)}}</span></p>
-
-            <p class="summary">{{searchItem.abstract}}</p>
-            <read-more></read-more>
-        </article>
 
 
     </div>

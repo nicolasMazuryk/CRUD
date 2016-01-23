@@ -54,10 +54,11 @@ angular.module('crudAppControllers', [])
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: './partials/createArticle.tpl.html',
+                templateUrl: '../partials/create_article.tpl.html',
                 controller: 'createArticleCtrl as add',
                 size: 'md'
             });
+            console.log( 'modal open');
 
             modalInstance.result.then(function (newItem) {
                 vm.results.push(newItem);
@@ -232,13 +233,8 @@ angular.module('crudAppControllers', [])
     }])
 
     .controller( 'BodyCtrl', ['$scope', '$timeout', '$mdSidenav', function ($scope, $timeout, $mdSidenav ) {
-        $scope.toggleSideNav = function ( navId ) {
-           $mdSidenav(navId)
-                .toggle()
-                .then( function () {
-                   console.log('SideNav Right is open!');
-               });
-        }
+
+        $(".button-collapse").sideNav();
     }])
 
     .controller( 'SideNavCtrl', [ '$scope', '$timeout', '$mdSidenav', function ( $scope, $timeout, $mdSidenav ) {

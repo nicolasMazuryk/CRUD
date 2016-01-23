@@ -20,6 +20,10 @@ angular.module( 'crudApp', [
                 templateUrl: 'partials/form.tpl.html',
                 controller: 'newsRequestCtrl as news'
             })
+            .when( '/categories', {
+                templateUrl: 'partials/categories.tpl.html',
+                controller: 'newsRequestCtrl as news'
+            })
             .when( '/saves', {
                 templateUrl: 'partials/saves.tpl.html',
                 controller: 'savesTplCtrl as saves'

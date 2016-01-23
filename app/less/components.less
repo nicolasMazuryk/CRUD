@@ -49,6 +49,13 @@ article.card {
         line-height: inherit;
       }
     }
+
+    &.new_item {
+      min-height: 160px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .input-field {
@@ -74,5 +81,31 @@ article.card {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
+  }
+
+
+  // newswire view
+
+  &.newswire {
+    flex: 0 0 48%;
+
+    .newswire__header {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0, .05);
+      padding: 20px;
+
+      img {
+        margin-right: 5%;
+        border-radius: 50%;
+      }
+
+      .card-title {
+        padding: 0;
+        background: none;
+      }
+    }
   }
 }

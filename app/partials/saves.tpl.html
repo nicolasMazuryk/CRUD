@@ -1,17 +1,27 @@
 <div class="view likes__">
-    <div class="panel">{{storageLength}}</div>
-
+    <!--<span class="new badge">{{storageLength}}</span>-->
 
     <div ng-if="storageLength" class="content">
-        <article class="waves-effect content__article card waves-light" ng-click="open()">
+        <article ng-click="open()" class="waves-effect content__article card waves-light">
             <div class="card-title">Create New Article</div>
-            <div class="card-content">
-                <button class="btn-floating waves-effect waves-light large"><i class="material-icons">add</i></button>
+            <div class="card-content new_item">
+                <button class="modal-trigger btn-floating waves-effect waves-light btn-large"><i class="material-icons">create</i></button>
             </div>
         </article>
 
         <article saved-item class="content__article card waves-light" ng-repeat="searchItem in saves.results track by $index">
         </article>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
     </div>
 
 </div>
