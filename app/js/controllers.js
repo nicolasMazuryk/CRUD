@@ -14,7 +14,6 @@ angular.module('crudAppControllers', [])
             return list[0] !== null;
         };
 
-        //$http.get('https://crud-it.herokuapp.com/saves')
         DataService.getData('/saves', 'GET')
             .success(function (data) {
 
@@ -42,7 +41,6 @@ angular.module('crudAppControllers', [])
         vm.removeFromSaved = function (index) {
             var removed = vm.results.splice(index, 1);
 
-            //$http.delete('https://crud-it.herokuapp.com/saves', JSON.stringify(removed[0]))
             DataService.getData('/saves', 'DELETE', JSON.stringify(removed[0]), {"Content-Type": "application/json;charset=utf-8"})
                 .then(function (res) {
                 $scope.storageLength -= 1;
@@ -55,15 +53,13 @@ angular.module('crudAppControllers', [])
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: '../partials/create_article.tpl.html',
-                controller: 'createArticleCtrl as add',
-                size: 'md'
+                controller: 'createArticleCtrl'
+                //size: 'lg'
             });
-            console.log( 'modal open');
 
             modalInstance.result.then(function (newItem) {
                 vm.results.push(newItem);
 
-                //$http.post('https://crud-it.herokuapp.com/', JSON.stringify(newItem))
                 DataService.getData('/', 'POST', JSON.stringify( newItem ))
                     .success(function (res) {
                         $scope.storageLength = res.storageLength;
@@ -188,7 +184,6 @@ angular.module('crudAppControllers', [])
 
                 post_item = event.updated_date ? new StoreItem() : event;
 
-            //$http.post('https://crud-it.herokuapp.com/', JSON.stringify(post_item))
             DataService.getData('/', 'POST', JSON.stringify( post_item ))
 
                 .success(function (res) {
@@ -232,18 +227,7 @@ angular.module('crudAppControllers', [])
 
     }])
 
-    .controller( 'BodyCtrl', ['$scope', '$timeout', '$mdSidenav', function ($scope, $timeout, $mdSidenav ) {
+    .controller( 'BodyCtrl', ['$scope', function ( $scope ) {
 
-        $(".button-collapse").sideNav();
-    }])
-
-    .controller( 'SideNavCtrl', [ '$scope', '$timeout', '$mdSidenav', function ( $scope, $timeout, $mdSidenav ) {
-
-        $scope.close = function ( navId ) {
-            $mdSidenav( navId ).close()
-                .then( function () {
-                    console.log('Right $MdSidenav is closed!');
-                });
-        };
     }]);
 

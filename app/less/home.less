@@ -14,7 +14,6 @@
 
   input[type=text] {
     width: 86.5%;
-    //height: 50px;
     font-size: 20px;
     text-indent: 12px;
   }
@@ -27,15 +26,6 @@
     i {
       font-size: 36px;
     }
-  }
-
-  // change material css
-
-  md-input-container.md-has-icon {
-    padding-left: 0;
-  }
-  md-input-container.md-has-icon>label {
-    left: 0;
   }
 }
 
@@ -116,42 +106,16 @@
   margin: 0 auto;
 
   .content__article {
-    //margin: 12px 0;
-    //padding: 8px;
     flex-basis: 32%;
     height: 100%;
-      //max-height: 250px;
-      //overflow: hidden;
     position: relative;
     background: #fff;
-    //font: 400 12pt "Ubuntu";
     transition: all 0.3s ease;
-
-
-    //&:hover {
-    //
-    //  like-icon {
-    //    display: block;
-    //    transition: all 0.25s ease;
-    //    cursor: pointer;
-    //  }
-    //}
-
-    .article__heading, .byline, .update-date, .summary, .hashtag {
-
-      //&:hover {
-      //  color: @text-input-edit;
-      //  transition: all 0.25s linear;
-      //}
-    }
 
     like-icon {
 
       i {
         color: #ffffff;
-        //line-height: 37px;
-        //width: 100%;
-        //text-align: center;
       }
 
       .marked i {
@@ -159,40 +123,8 @@
       }
     }
 
-
-
-
-    read-more {
-      //display: inline-block;
-      //padding: 0 4px;
-      //cursor: pointer;
-
-      a {
-        font-size: 10pt;
-      }
-    }
-
-    .figcaption-text {
-      margin: 0;
-      line-height: 14px;
-      color: #666;
-      font: 400 11pt "nyt-cheltenham-sh",georgia,"times new roman",times,serif;
-      text-align: justify;
-    }
-
-    .article__heading {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 500;
-      line-height: 19px;
-      color: #000;
-    }
-
-    .thumb {
-      float: right;
-      display: inline;
-      margin-left: 10px;
-      margin-bottom: 10px;
+    read-more a {
+      font-size: 10pt;
     }
 
     .byline {
@@ -211,7 +143,6 @@
       line-height: 18px;
       margin: 3px 0;
       text-align: justify;
-      font-family: georgia, "times new roman", times, serif;
 
       max-height: 106px;
       overflow: hidden;
@@ -225,48 +156,16 @@
       font-size: 11px;
       line-height: 12px;
     }
-
-    .hashtag {
-      display: inline-block;
-      padding: 0 3px;
-      line-height: 1 !important;
-      color: dodgerblue;
-      font: 300 7pt "Ubuntu";
-      text-decoration: underline;
-    }
   }
 }
 
-//.content__article:hover.edit:before {
-//  position: absolute;
-//  display: inline-block;
-//  margin: 5px;
-//  content: '';
-//  width: 50px;
-//  height: 50px;
-//  top: 0;
-//  right: 0;
-//  background: url(../img/icon-edit.png), rgba(255,255,255, .8);
-//  background-position: center center;
-//  background-repeat: no-repeat;
-//  z-index: 3;
-//  cursor: pointer;
-//}
-
 footer {
-  font: 400 9pt "Ubuntu";
+  font-size: 9pt;
 
   .developer {
     color: #00796b;
     font-size: 1.1em;
   }
-}
-
-.top {
-  position: fixed;
-  right: 100px;
-  bottom: 100px;
-  background: rgba(112,122,122, .6);
 }
 
 //---------------- Bookmarks page-----------------
@@ -294,41 +193,4 @@ footer {
   }
 }
 
-md-toolbar .md-toolbar-tools {
-
-  md-button {
-    width: 50px;
-    height: 50px;
-
-    md-icon {
-      width: 36px;
-      height: 36px;
-    }
-
-    .md-ripple-container {
-      width: 50px;
-      height: 50px;
-    }
-  }
-
-  a {
-    margin-left: auto;
-    img {
-      zoom: 0.15;
-    }
-  }
-}
-
-.menu__item {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-content: center;
-  width: 100%;
-
-  p {
-    text-align: left;
-    text-transform: uppercase;
-  }
-}
 

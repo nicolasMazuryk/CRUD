@@ -17,8 +17,6 @@ angular.module( 'crudAppDirectives', [])
         }
     })
 
-    // grade, favourite
-
     .directive( 'readMore', function () {
         return {
             restrict: "E",
@@ -105,7 +103,6 @@ angular.module( 'crudAppDirectives', [])
                             break;
                     }
                     DataService.getData('/saves', 'PUT', JSON.stringify( ctrl.results[index]))
-                    //$http.put( 'https://crud-it.herokuapp.com/saves', JSON.stringify( ctrl.results[index]))
                         .then( function ( res ) {
                         ctrl.results = res.data.saves;
                     });

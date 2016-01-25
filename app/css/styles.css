@@ -56,11 +56,6 @@ body * {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.nyt {
-  display: block;
-  margin: 0 auto;
-  zoom: 0.35;
-}
 .grid-960 {
   width: 960px;
   margin: 0 auto;
@@ -248,12 +243,6 @@ article.card.newswire .newswire__header .card-title {
 .form__search .btn-search i {
   font-size: 36px;
 }
-.form__search md-input-container.md-has-icon {
-  padding-left: 0;
-}
-.form__search md-input-container.md-has-icon > label {
-  left: 0;
-}
 .btn_load {
   display: block;
   width: 100%;
@@ -362,26 +351,6 @@ article.card.newswire .newswire__header .card-title {
 .content .content__article read-more a {
   font-size: 10pt;
 }
-.content .content__article .figcaption-text {
-  margin: 0;
-  line-height: 14px;
-  color: #666;
-  font: 400 11pt "nyt-cheltenham-sh", georgia, "times new roman", times, serif;
-  text-align: justify;
-}
-.content .content__article .article__heading {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 19px;
-  color: #000;
-}
-.content .content__article .thumb {
-  float: right;
-  display: inline;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
 .content .content__article .byline {
   display: block;
   font-size: 11px;
@@ -397,7 +366,6 @@ article.card.newswire .newswire__header .card-title {
   line-height: 18px;
   margin: 3px 0;
   text-align: justify;
-  font-family: georgia, "times new roman", times, serif;
   max-height: 106px;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
@@ -409,26 +377,12 @@ article.card.newswire .newswire__header .card-title {
   font-size: 11px;
   line-height: 12px;
 }
-.content .content__article .hashtag {
-  display: inline-block;
-  padding: 0 3px;
-  line-height: 1 !important;
-  color: dodgerblue;
-  font: 300 7pt "Ubuntu";
-  text-decoration: underline;
-}
 footer {
-  font: 400 9pt "Ubuntu";
+  font-size: 9pt;
 }
 footer .developer {
   color: #00796b;
   font-size: 1.1em;
-}
-.top {
-  position: fixed;
-  right: 100px;
-  bottom: 100px;
-  background: rgba(112, 122, 122, 0.6);
 }
 .items-amount {
   position: absolute;
@@ -447,43 +401,4 @@ footer .developer {
   .content {
     width: 100%;
   }
-}
-md-toolbar .md-toolbar-tools md-button {
-  width: 50px;
-  height: 50px;
-}
-md-toolbar .md-toolbar-tools md-button md-icon {
-  width: 36px;
-  height: 36px;
-}
-md-toolbar .md-toolbar-tools md-button .md-ripple-container {
-  width: 50px;
-  height: 50px;
-}
-md-toolbar .md-toolbar-tools a {
-  margin-left: auto;
-}
-md-toolbar .md-toolbar-tools a img {
-  zoom: 0.15;
-}
-.menu__item {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row nowrap;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-align-content: center;
-      -ms-flex-line-pack: center;
-          align-content: center;
-  width: 100%;
-}
-.menu__item p {
-  text-align: left;
-  text-transform: uppercase;
 }

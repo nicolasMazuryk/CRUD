@@ -8,7 +8,6 @@
                 <label class="btn" for="default">All</label>
             </div>
 
-
             <div ng-repeat="catagory in news.catagories" class="form__checkbox">
                 <input checkbox-group id="{{catagory.section}}" type="checkbox" value="{{catagory.section}}"/>
                 <label class="btn" for="{{catagory.section}}">{{catagory.display_name}}</label>

@@ -7,7 +7,6 @@ angular.module( 'crudApp', [
     'angular-spinkit',
     'crudAppControllers',
     'crudAppDirectives',
-    //'crudAppFilters',
     'crudAppServices',
     'ngMaterial',
     'ngRoute',
